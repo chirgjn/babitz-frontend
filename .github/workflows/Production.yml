@@ -36,7 +36,7 @@ jobs:
     - name: Create build
       run: npm run build  
         
-    - name: Deploment For Vercel
+    - name: Deployment For Vercel
       uses: amondnet/vercel-action@v20
       if: github.event_name == 'pull_request'
       with:
