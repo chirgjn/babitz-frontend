@@ -6,6 +6,6 @@ context("Home", () => {
   });
 
   it("should find the title of the homepage", () => {
-    cy.get("h1").contains("Babitz");
+    cy.get("title").contains("Babitz");
   });
 });
