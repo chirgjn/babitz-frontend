@@ -17,6 +17,7 @@
     "pre-commit": "npm run lint && npm run test && npm run cypress:coverage && npm run prettier && git add -A ."
   },
   "dependencies": {
+    "firebase": "^8.7.1",
     "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -25,7 +26,7 @@
   },
   "nyc": {
     "excludeAfterRemap": false
-      },
+  },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.9",
     "@istanbuljs/nyc-config-babel": "^3.0.0",

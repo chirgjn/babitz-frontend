@@ -3,7 +3,15 @@ import Image from "next/image";
 import styled from "styled-components";
 import Button from "../Components/Button";
 import { useRouter } from 'next/router';
+import firebase from "firebase/app";
+import { useState } from "react";
+import "firebase/auth";
+import initFirebase from "../../services/firebase.js";
+import withoutAuth from "../../helpers/withoutAuth";
 
+initFirebase();
+
+const provider = new firebase.auth.GoogleAuthProvider();
 
 //---------styling-starts----------
 const Box = styled.div`
@@ -73,10 +81,44 @@ height:100%;
 `;
 //---------styling-ends------------
 
-export default function Login(){
-  const router  = useRouter();
+function Login(){
+  const router = useRouter();
+  const [authorizing, setAuthorizing] = useState(false);
+
+  const handleAuthentication = async () => {
+    setAuthorizing(true);
+
+    const result = await firebase.auth().signInWithPopup(provider);
+
+    const { user } = result;
+    if (!user) {
+      throw new Error("There was an issue authorizing");
+    }
+    if(result.additionalUserInfo.isNewUser)
+    {
+      setAuthorizing(false);
+      router.push("/Template/chooseTemplate");
+    }
+    else if (!result.additionalUserInfo.isNewUser){
+      setAuthorizing(false);
+      router.push("/Dashboard/dashboard");
+    }
+  };
+  // const currentUser=()=> {
+  //   console.log(10);
+  //   // [START auth_current_user]
+  //   const user = firebase.auth().currentUser;
+  //
+  //   if (user) {
+  //     console.log(user);
+  //   } else {
+  //     console.log("no user");
+  //     // No user is signed in.
+  //   }
+  //   // [END auth_current_user]
+  // }
   const signUp=()=>{
-    router.push('/auth/signup');
+    router.push('/Auth/signup');
   }
   const home=()=>{
     router.push('/');
@@ -115,7 +157,7 @@ export default function Login(){
     <div className="col-sm-6">
     <center>
     <Heading3 style={{marginTop:'40px'}}>Sign In</Heading3>
-    <svg style={{marginTop:'30px', cursor:'pointer'}} width="200" height="73" viewBox="0 0 367 73" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+    <svg onClick={handleAuthentication} style={{marginTop:'30px', cursor:'pointer'}} width="200" height="73" viewBox="0 0 367 73" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
     <g filter="url(#filter0_d)">
     <rect x="4" width="359" height="65" rx="25" fill="#FAE2A9"/>
     <rect x="11" y="8" width="48" height="48" rx="24" fill="url(#pattern0)"/>
@@ -150,3 +192,4 @@ export default function Login(){
     </div>
   )
 }
+export default withoutAuth(Login);

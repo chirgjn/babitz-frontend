@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Button from "./Components/Button";
 import { useRef } from "react";
 import { useRouter } from "next/router";
+import withoutAuth from "../helpers/withoutAuth";
 
 //---------styling-starts----------
 const Logo = styled.svg`
@@ -34,7 +35,7 @@ const Navlink = styled.a`
     text-decoration: none;
     /* color:black; */
   }
-  @media (max-width: 768px) {
+  @media (max-width: 950px) {
     display: none;
   }
 `;
@@ -162,7 +163,7 @@ const Images = styled.svg`
 `;
 //------------styling-ends----------
 
-export default function Home() {
+function Home() {
   let refAbout = useRef(null);
   let refContact = useRef(null);
   const router = useRouter();
@@ -172,10 +173,10 @@ export default function Home() {
   const contactClick = () =>
     refContact.current.scrollIntoView({ behavior: "smooth", block: "start" });
   const startNow = () => {
-    router.push("/auth/signup");
+    router.push("/Auth/signup");
   };
   const login = () => {
-    router.push("/auth/login");
+    router.push("/Auth/login");
   };
   return (
     <div>
@@ -532,7 +533,7 @@ export default function Home() {
             <div className="row">
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
                 <svg
-                  width="auto"
+                  width="100%"
                   height="60"
                   viewBox="0 0 133 73"
                   fill="none"
@@ -573,7 +574,7 @@ export default function Home() {
               </div>
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
                 <svg
-                  width="auto"
+                  width="100%"
                   height="60"
                   viewBox="0 0 78 73"
                   fill="none"
@@ -614,7 +615,7 @@ export default function Home() {
               </div>
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
                 <svg
-                  width="auto"
+                  width="100%"
                   height="60"
                   viewBox="0 0 72 72"
                   fill="none"
@@ -905,3 +906,4 @@ export default function Home() {
     </div>
   );
 }
+export default withoutAuth(Home);
