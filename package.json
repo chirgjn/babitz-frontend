@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "prettier": "prettier '**pages/*.js*' '**pages/api/*.js*' '**pages/Components/*.js*' --write --ignore-unknown",
+    "prettier": "prettier '**pages/*.js*' '**pages/*/*.js*' --write --ignore-unknown",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "cypress:open": "cypress open",

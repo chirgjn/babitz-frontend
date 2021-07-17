@@ -3,16 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import withAuth from "../../helpers/withAuth";
 import firebase from "firebase/app";
-import { useEffect, useState } from 'react';
-import Loader from '../Components/Loader';
+import { useEffect, useState } from "react";
+import Loader from "../Components/Loader";
 
 function Dashboard() {
-const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-      setLoading(false);
-
-   }, [])
+    setLoading(false);
+  }, []);
   function signOut() {
     // [START auth_sign_out]
     firebase
@@ -27,8 +26,8 @@ const [loading, setLoading] = useState(true);
       });
     // [END auth_sign_out]
   }
-if(loading==true){
-    return(<Loader/>)
+  if (loading == true) {
+    return <Loader />;
   }
   return (
     <div>
