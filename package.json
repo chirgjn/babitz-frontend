@@ -25,7 +25,7 @@
   },
   "nyc": {
     "excludeAfterRemap": false
-  },
+      },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.9",
     "@istanbuljs/nyc-config-babel": "^3.0.0",

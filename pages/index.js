@@ -4,6 +4,7 @@ import styles from "../styles/Home.module.css";
 import styled from "styled-components";
 import Button from "./Components/Button";
 import { useRef } from "react";
+import { useRouter } from "next/router";
 
 //---------styling-starts----------
 const Logo = styled.svg`
@@ -164,12 +165,18 @@ const Images = styled.svg`
 export default function Home() {
   let refAbout = useRef(null);
   let refContact = useRef(null);
+  const router = useRouter();
 
   const aboutClick = () =>
     refAbout.current.scrollIntoView({ behavior: "smooth", block: "start" });
   const contactClick = () =>
     refContact.current.scrollIntoView({ behavior: "smooth", block: "start" });
-
+  const startNow = () => {
+    router.push("/auth/signup");
+  };
+  const login = () => {
+    router.push("/auth/login");
+  };
   return (
     <div>
       <Head>
@@ -232,7 +239,7 @@ export default function Home() {
               />
             </Logo>
             <Navlink onClick={contactClick}>Contact Us</Navlink>
-            <Navlink href="#news">SignIn</Navlink>
+            <Navlink onClick={login}>SignIn</Navlink>
           </div>
         </center>
       </div>
@@ -418,6 +425,7 @@ export default function Home() {
             <Title>Babitz</Title>
             <Heading1>ORDER, EAT, REPEAT.</Heading1>
             <Button
+              onClick={startNow}
               style={{
                 position: "absolute",
                 left: "50%",
@@ -463,6 +471,7 @@ export default function Home() {
             </ImageDiv>
             <ButtonDiv>
               <Button
+                onClick={startNow}
                 style={{
                   position: "absolute",
                   left: "50%",
@@ -627,7 +636,10 @@ export default function Home() {
                 </Heading3>
               </div>
             </div>
-            <Button style={{ background: "white", marginBottom: "40px" }}>
+            <Button
+              onClick={startNow}
+              style={{ background: "white", marginBottom: "40px" }}
+            >
               Start Now
             </Button>
 
@@ -703,7 +715,7 @@ export default function Home() {
                     Nunc sit amet quam ac mi
                   </Heading4>
                 </Heading3Div>
-                <Button>Start Now</Button>
+                <Button onClick={startNow}>Start Now</Button>
                 <br />
                 <Images
                   style={{
@@ -768,7 +780,9 @@ export default function Home() {
                     consectetur adipiscing elit. Nunc sit amet quam ac mi’{" "}
                   </Heading3>
                 </div>
-                <Button style={{ marginTop: "50px" }}>Start Now</Button>
+                <Button onClick={startNow} style={{ marginTop: "50px" }}>
+                  Start Now
+                </Button>
               </div>
               <div className="col-sm-6">
                 <Images
