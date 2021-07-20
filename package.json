@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier '**pages/*.js*' '**pages/api/*.js*' --write --ignore-unknown"
   },
   "dependencies": {
     "next": "11.0.1",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "eslint": "7.30.0",
-    "eslint-config-next": "11.0.1"
+    "eslint-config-next": "11.0.1",
+    "prettier": "^2.3.2"
   }
 }
