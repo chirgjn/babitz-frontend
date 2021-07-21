@@ -12,7 +12,9 @@
     "test:coverage": "jest --coverage",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --spec 'cypress/integration/*.spec.js'",
-    "cypress:coverage": "nyc npm run cypress:run"
+    "cypress:coverage": "nyc npm run cypress:run",
+    "prepare": "husky install",
+    "pre-commit": "npm run lint && npm run test && npm run cypress:coverage && npm run prettier && git add -A ."
   },
   "dependencies": {
     "next": "11.0.1",
@@ -34,6 +36,7 @@
     "cypress": "^7.7.0",
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
+    "husky": "^7.0.1",
     "jest": "^26.4.2",
     "nyc": "^15.1.0",
     "prettier": "^2.3.2"
