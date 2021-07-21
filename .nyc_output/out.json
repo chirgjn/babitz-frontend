@@ -1,0 +1,104 @@
+{
+  "D:\\Mywork\\reactjs\\Pesto\\final\\babitz\\pages\\_app.js": {
+    "path": "D:\\Mywork\\reactjs\\Pesto\\final\\babitz\\pages\\_app.js",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 4,
+          "column": 2
+        },
+        "end": {
+          "line": 17,
+          "column": 3
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "MyApp",
+        "decl": {
+          "start": {
+            "line": 3,
+            "column": 9
+          },
+          "end": {
+            "line": 3,
+            "column": 14
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 41
+          },
+          "end": {
+            "line": 19,
+            "column": 1
+          }
+        },
+        "line": 3
+      }
+    },
+    "branchMap": {},
+    "s": {
+      "0": 2
+    },
+    "f": {
+      "0": 2
+    },
+    "b": {},
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "82e0dbc0bca06c3252ce61d0135b460b496ed42f"
+  },
+  "D:\\Mywork\\reactjs\\Pesto\\final\\babitz\\pages\\index.js": {
+    "path": "D:\\Mywork\\reactjs\\Pesto\\final\\babitz\\pages\\index.js",
+    "statementMap": {
+      "0": {
+        "start": {
+          "line": 6,
+          "column": 2
+        },
+        "end": {
+          "line": 66,
+          "column": 4
+        }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "Home",
+        "decl": {
+          "start": {
+            "line": 5,
+            "column": 24
+          },
+          "end": {
+            "line": 5,
+            "column": 28
+          }
+        },
+        "loc": {
+          "start": {
+            "line": 5,
+            "column": 31
+          },
+          "end": {
+            "line": 67,
+            "column": 1
+          }
+        },
+        "line": 5
+      }
+    },
+    "branchMap": {},
+    "s": {
+      "0": 2
+    },
+    "f": {
+      "0": 2
+    },
+    "b": {},
+    "_coverageSchema": "1a1c01bbd47fc00a2c39e90264f33305004495a9",
+    "hash": "28a4e2f7e6d5303af08ae0d5d3968d670dafae6b"
+  }
+}
