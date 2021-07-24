@@ -1,6 +1,6 @@
 # Babitz Frontend
 
-This is a [Next.js](https://nextjs.org/) project. If you want to know more about Babitz, you can read the checkout the [main project repo](https://github.com/pesto-students/babitz)).
+This is a [Next.js](https://nextjs.org/) project. If you want to know more about Babitz, you can read the checkout the [main project repo](https://github.com/pesto-students/babitz).
 
 ---
 
