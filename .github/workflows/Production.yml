@@ -37,11 +37,16 @@ jobs:
       run: npm run lint
       
     - name: Run test cases and coverage
-      run: npm run test:coverage      
+      run: npm run test:coverage
+      
+    - name: Run test coverage report
+      run: npm run coverage:report
       
     - name: Create build
       run: npm run build  
-        
+      
+      
+# Setup for preview url and deployment through vercel        
     - name: Deployment For Vercel
       uses: amondnet/vercel-action@v20
       if: github.event_name == 'pull_request'
@@ -51,7 +56,8 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
    
-      
+
+# Setup for production on vercel      
     - name: Production For Vercel
       uses: amondnet/vercel-action@v20
       if: github.event_name == 'push'
