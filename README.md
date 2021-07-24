@@ -46,4 +46,4 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 Before proceeding further with this project kindly go through all the documentation provided at [Babitz Main Repo](https://github.com/pesto-students/babitz).
 
-Also refer to **[Contribution guideline](/CONTRIBUTING.md)** there you will find all the necessary information regarding the how to create file, write and structure code for this project feel free to contribute if you think we miss on any guideline that should be followed.
+Please refer to **[Contribution guideline](/CONTRIBUTING.md)**. You will find all the necessary information regarding the how to create file, write and structure code for this project. Feel free to contribute, suggestion for changes in the guidelines are also welcomed.
