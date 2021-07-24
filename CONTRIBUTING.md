@@ -10,8 +10,8 @@ Here you will find all the necessary information regarding how to create file, w
 - Leave wide spaces in codes
 
 ## Next.js 
-- Wherever possible create Static Side Generated Pages for better performance. [Pre-rendering in nextjs](https://nextjs.org/docs/basic-features/pages#two-forms-of-pre-rendering)
-- Avoid using client side rendering, instead use server side rendering. [Pre-rendering in nextjs(CSR, SSR)](https://nextjs.org/docs/basic-features/pages#two-forms-of-pre-rendering)
+- Wherever possible create Static Side Generated Pages for better performance. [Static Generation (Recommended)](https://nextjs.org/docs/basic-features/pages#static-generation-recommended)
+- Avoid using client side rendering, instead use server side rendering. [Server Side Rendering](https://nextjs.org/docs/basic-features/pages#server-side-rendering)
     - When the initial loading needs to be fast and there is more static content, prefer using server side rendering.
     - When the page has large and dynamic data and the focus is a rich page with a large number of users, prefer client side rendering.
 
@@ -19,35 +19,15 @@ Here you will find all the necessary information regarding how to create file, w
 
 - Avoid making large pull requests so that code review gets easier
 - Add appropriate documentation with your changes
-
-### [How to create a Pull Request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
-
-- On GitHub, navigate to the main page of the repository.
-- In the "Branch" menu, choose the branch that contains your commits.
-- Above the list of files, click  Pull request.
-- Use the base branch dropdown menu to select the branch you'd like to merge your changes into, then use the compare branch drop-down menu to choose the topic branch you made your changes in.
-- Type a title and description for your pull request.
-- To create a pull request that is ready for review, click Create Pull Request. To create a draft pull request, use the drop-down and select Create Draft Pull Request, then click Draft Pull Request.
-- When the pull request is ready for review add a reviewer.
-- And then assign the pull request to yourself to follow up.
-
+-Follow [How to create a Pull Request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) to create a new *draft* PR.Don't forget to assign the PR to yourself.
+- Once the PR is ready for review convert it to a normal PR from draft PR and add the reviewer. 
 
 ## Commit messages
 
 Commit messages should adhere to the following guidelines:
 
-- Should be in active case
-- Should be divided into a subject line and a body
-- The subject summarizes the code changes in commit
-- Use the body to explain what and why vs. How
-- Separate subject from body with a blank line
-- Use the imperative mood in the subject line
-- Do not end the subject line with a period
-- Limit the subject line to 50 characters
-- Capitalize the subject line
-- Wrap the body at 72 characters
-- You can also use commitizen cli to check your commit messages. [Commitizen](https://commitizen.github.io/cz-cli/)
-Reference: [how to write good commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- Our commit messages follow the [conventional commits spec](https://www.conventionalcommits.org/en/v1.0.0/)
+- You can also use [commitizen cli](https://commitizen.github.io/cz-cli/) to create / check your commit messages.
 
 ## Directory structure
 
@@ -115,25 +95,26 @@ Every feature should have a separate folder in the pages directory, all the rout
 
 ## Naming
 
-Lowercase is preferred for folder and file names, one exception to this is Files which represent the React components, for which Capitalized is preferred. [Examples for Naming Coventions](https://github.com/vercel/next.js/tree/canary/examples) 
+- Lowercase is preferred for folder and file names.
+- One exception is, files which represent React components, for which PascalCace is preferred. Here are [some examples](https://github.com/vercel/next.js/tree/canary/examples).
 
-## Routing in Nextjs
+## Routing
 
-You can refer this link to better understand routing in nextjs. [Routing](https://nextjs.org/docs/routing/introduction)
+Please refer to the [Next.js routing documentation](https://nextjs.org/docs/routing/introduction)
 
 ## Styles
 
-- `components` will contain reusable UI component for eg. `Button`, `Input` etc.
-- If a style is specific only to the component, and cannot be used anywhere else, use inline styling using styled-components.
-- All CSS should be used with styled-components and bootstrap. 
+- The `components` folder will contain reusable UI component for eg. `Button`, `Input` etc.
+- If a style is specific only to the component, and cannot be used anywhere else, use styled-components to style the same.
+- All CSS should be used with styled-components. 
 
 ## Testing
 
 - Write unit tests using jest in the __test__ folder.
-- Write integration test using cypress in cypress/integration folder. [How to write cypress tests](https://docs.cypress.io/guides/getting-started/writing-your-first-test#Add-a-test-file)
-- Make sure you cover at least 50% of the test-case scenario.
+- Write integration test using cypress in cypress/integration folder. If you're unfamiliar with cypress, the "[writing your first test](https://docs.cypress.io/guides/getting-started/writing-your-first-test#Add-a-test-file)" guide is a good place to start.
+- The project imposes a minimum coverage of 50%.
 - You can generate "test coverage" for modified files using the `npm run test:coverage` command.
-- You can set threshold for test coverage inside jest configuration. [Jest Coverage Threshold](https://jestjs.io/docs/configuration#coveragethreshold-object)  
+- You can check if your test coverage meets the required test coverage by `npm run coverage:report` command.  
 
 
 
