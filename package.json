@@ -6,13 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix",
-    "prettier": "prettier '**pages/*.js*' '**pages/api/*.js*' --write --ignore-unknown",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --spec 'cypress/integration/*.spec.js'",
     "cypress:coverage": "nyc npm run cypress:run"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "lint-prettier": "eslint-config-prettier '**/*.{js,jsx,vue}'",
+    "prettier": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --write --ignore-unknown"
   },
   "dependencies": {
     "next": "11.0.1",
@@ -36,6 +38,7 @@
     "eslint-config-next": "11.0.1",
     "jest": "^26.4.2",
     "nyc": "^15.1.0",
+    "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.3.2"
   },
   "jest": {
