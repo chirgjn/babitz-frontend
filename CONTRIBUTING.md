@@ -12,21 +12,19 @@ Here you will find all the necessary information regarding how to create file, w
 ## Next.js 
 - Wherever possible create Static Side Generated Pages for better performance. [Static Generation (Recommended)](https://nextjs.org/docs/basic-features/pages#static-generation-recommended)
 - Avoid using client side rendering, instead use server side rendering. [Server Side Rendering](https://nextjs.org/docs/basic-features/pages#server-side-rendering)
-    - When the initial loading needs to be fast and there is more static content, prefer using server side rendering.
-    - When the page has large and dynamic data and the focus is a rich page with a large number of users, prefer client side rendering.
+- When the initial loading needs to be fast and there is more static content, prefer using server side rendering.
+- When the page has large and dynamic data and the focus is a rich page with a large number of users, prefer client side rendering.
 
 ## Git and Github
 
 - Avoid making large pull requests so that code review gets easier
 - Add appropriate documentation with your changes
--Follow [How to create a Pull Request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) to create a new *draft* PR.Don't forget to assign the PR to yourself.
+-Follow [How to create a Pull Request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) to create a new *draft* PR. Don't forget to assign the PR to yourself.
 - Once the PR is ready for review convert it to a normal PR from draft PR and add the reviewer. 
 
 ## Commit messages
 
-Commit messages should adhere to the following guidelines:
-
-- Our commit messages follow the [conventional commits spec](https://www.conventionalcommits.org/en/v1.0.0/)
+- Our commit messages follow the [conventional commits spec](https://www.conventionalcommits.org/en/v1.0.0/).
 - You can also use [commitizen cli](https://commitizen.github.io/cz-cli/) to create / check your commit messages.
 
 ## Directory structure
