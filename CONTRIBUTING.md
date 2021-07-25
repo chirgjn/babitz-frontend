@@ -24,8 +24,9 @@ Here you will find all the necessary information regarding how to create file, w
 
 ## Commit messages
 
-- Our commit messages follow the [conventional commits spec](https://www.conventionalcommits.org/en/v1.0.0/).
-- You can also use [commitizen cli](https://commitizen.github.io/cz-cli/) to create / check your commit messages.
+Commit messages should follow the [conventional commits spec](https://www.conventionalcommits.org/en/v1.0.0/).
+
+You can also use [commitizen cli](https://commitizen.github.io/cz-cli/) to create / check your commit messages.
 
 ## Directory structure
 
@@ -113,5 +114,4 @@ Please refer to the [Next.js routing documentation](https://nextjs.org/docs/rout
 - The project imposes a minimum coverage of 50%.
 - You can generate "test coverage" for modified files using the `npm run test:coverage` command.
 - You can check if your test coverage meets the required test coverage by `npm run coverage:report` command.  
-
 
