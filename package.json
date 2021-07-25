@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier:check:": "eslint-config-prettier '**/*.{js,jsx,vue}'",
+    "prettier:check": "eslint-config-prettier '**/*.{js,jsx,vue}'",
     "prettier:fix": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --write --ignore-unknown"
   },
   "dependencies": {
