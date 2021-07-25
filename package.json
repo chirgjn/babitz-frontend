@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "prettier": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --ignore-unknown",
     "prettier:check": "npm run prettier -l",
     "prettier:fix": "npm run prettier --write"
