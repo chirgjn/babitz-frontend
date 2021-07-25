@@ -19,7 +19,7 @@ Here you will find all the necessary information regarding how to create file, w
 
 - Avoid making large pull requests so that code review gets easier
 - Add appropriate documentation with your changes
--Follow [How to create a Pull Request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) to create a new *draft* PR. Don't forget to assign the PR to yourself.
+- Follow [How to create a Pull Request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) to create a new *draft* PR. Don't forget to assign the PR to yourself.
 - Once the PR is ready for review convert it to a normal PR from draft PR and add the reviewer. 
 
 ## Commit messages
@@ -113,6 +113,5 @@ Please refer to the [Next.js routing documentation](https://nextjs.org/docs/rout
 - The project imposes a minimum coverage of 50%.
 - You can generate "test coverage" for modified files using the `npm run test:coverage` command.
 - You can check if your test coverage meets the required test coverage by `npm run coverage:report` command.  
-
 
 
