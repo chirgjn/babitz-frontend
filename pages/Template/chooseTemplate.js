@@ -8,7 +8,7 @@ import Loader from "../Components/Loader";
 import styled from "styled-components";
 import styles from "../../styles/chooseTemplate.module.css";
 import { useRouter } from "next/router";
-
+import Error from 'next/error';
 //---------styling-starts----------
 
 const Navbar = styled.div`
@@ -79,12 +79,14 @@ const Button = styled.div`
 //---------styling-ends----------
 
 function ChooseTemplate() {
+  const router = useRouter();
   const [template_id, setTemplate_id] = useState("1");
   const [template_name, setTemplate_name] = useState("Template 1");
   const [template_descr, setTemplate_descr] = useState(
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet quam ac mi"
   );
-  const router = useRouter();
+  const user = firebase.auth().currentUser;
+
 
   const choose_Template = (event) => {
     let value = event.target.value;
@@ -108,7 +110,26 @@ function ChooseTemplate() {
   };
 
   const save_Template = () => {
-    router.push("/Template/editTemplate");
+    if(template_id!=3){
+    var formdata = new FormData();
+    formdata.append("templateId", template_id);
+    var requestOptions = {
+      method: 'POST',
+      body: formdata,
+      redirect: 'follow',
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': user.Aa,
+          },
+    };
+    fetch("https://babitz-backend.herokuapp.com/restaurants", requestOptions)
+    .then((response) => response.json())
+ .then((json) => {console.log(json)});
+}
+else{
+  alert('This template is not avaiable currently');
+}
   };
   return (
     <div>
