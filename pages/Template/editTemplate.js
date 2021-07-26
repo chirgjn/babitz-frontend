@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Loader from "../Components/Loader";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-
+import Edit from '../../helpers/edittemp';
 //----------style-starts---------
 
 const Logo = styled.p`
@@ -126,16 +126,15 @@ function EditTemplate() {
   const router = useRouter();
 
   const [restname, setRestname] = useState("Babitz");
+  const [restdescr, setRestdescr] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+  const [restaddress, setRestaddress] = useState("21st Street, New York The USA");
   const [modalname, setModalname] = useState("");
-  const update = (event) => {
-    if ((event = "Restname")) {
-      setModalname("Restaurant Name");
-    }
-  };
-  const change_restname = (event) => {
-    console.log(event.target.value);
-    setRestname(event.target.value);
-  };
+  const [modaltype, setModaltype] = useState("");
+  const [modalfunc, setModalfunc] = useState("");
+  const [changetype, setChangetype] = useState("");
+  const [changefunc, setChangefunc] = useState("");
+
+
   const changeTemplate = () => {
     router.push("/Template/chooseTemplate");
   };
@@ -159,39 +158,7 @@ function EditTemplate() {
       </Head>
       <Home>
         <div className="container">
-          <div className="modal fade" id="myModal" role="dialog">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <button type="button" className="close" data-dismiss="modal">
-                    &times;
-                  </button>
-                  <h4 className="modal-title">{modalname}</h4>
-                </div>
-                <form>
-                  <div className="modal-body">
-                    <input
-                      type="text"
-                      onChange={change_restname}
-                      defaultValue={restname}
-                      className="form-control"
-                      placeholder={modalname}
-                      required
-                    />
-                  </div>
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn btn-default"
-                      data-dismiss="modal"
-                    >
-                      Save
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+        <Edit changetype={eval(changetype)} changefunc={eval(changefunc)} modalname={modalname} modaltype={modaltype} modalfunc={modalfunc}/>
           <div style={{ marginTop: "20px" }}>
             <Logo>
               LOGO
@@ -235,7 +202,7 @@ function EditTemplate() {
               <Restname>
                 {restname}
                 <svg
-                  onClick={() => update("Restname")}
+                  onClick={() => {setModalname('Restaurant Name'); setModalfunc('set_restname'); setModaltype('text'); setChangetype('restname'); setChangefunc('setRestname')}}
                   data-toggle="modal"
                   data-target="#myModal"
                   style={{
@@ -260,7 +227,10 @@ function EditTemplate() {
               </Restname>
               <Restdescr>
                 <svg
-                  style={{ cursor: "pointer", marginBottom: "20px" }}
+                onClick={() => {setModalname('Restaurant Description'); setModalfunc('set_restdescr'); setModaltype('text'); setChangetype('restdescr'); setChangefunc('setRestdescr')}}
+                data-toggle="modal"
+                data-target="#myModal"
+                  style={{ cursor: "pointer", marginBottom: "20px", outline:'none' }}
                   width="35"
                   height="35"
                   viewBox="0 0 27 27"
@@ -275,7 +245,7 @@ function EditTemplate() {
                     fill="black"
                   />
                 </svg>{" "}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                {restdescr}
               </Restdescr>
             </div>
           </div>
@@ -357,9 +327,12 @@ function EditTemplate() {
       <Footer>
         <Location>Location</Location>
         <Address>
-          21st Street, New York The USA
+          {restaddress}
           <svg
-            style={{ cursor: "pointer", marginBottom: "20px" }}
+          onClick={() => {setModalname('Restaurant Address'); setModalfunc('set_restaddress'); setModaltype('text'); setChangetype('restaddress'); setChangefunc('setRestaddress')}}
+          data-toggle="modal"
+          data-target="#myModal"
+            style={{ cursor: "pointer", marginBottom: "20px", outline:'none' }}
             width="20"
             height="20"
             viewBox="0 0 27 27"
