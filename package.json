@@ -16,7 +16,9 @@
     "lint:fix": "next lint --fix",
     "prettier": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --ignore-unknown",
     "prettier:check": "npm run prettier -l",
-    "prettier:fix": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --write --ignore-unknown"
+    "prettier:fix": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --write --ignore-unknown",
+    "prepare": "husky install",
+    "pre-commit": "npm run prettier:check && npm run lint && npm run test && npm run cypress:run"
   },
   "dependencies": {
     "next": "11.0.1",
@@ -39,6 +41,7 @@
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
     "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.1",
     "jest": "^26.4.2",
     "nyc": "^15.1.0",
     "prettier": "^2.3.2"
