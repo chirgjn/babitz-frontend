@@ -37,11 +37,8 @@ jobs:
       run: npm run lint
       
     - name: Run test cases and coverage
-      run: npm run test
-      
-    - name: Run test coverage report
-      run: npm run coverage:report
-      
+      run: npm run test:coverage
+  
     - name: Create build
       run: npm run build  
       
