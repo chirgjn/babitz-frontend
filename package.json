@@ -14,9 +14,9 @@
     "coverage:report": "nyc report --check-coverage --statements 50",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "prettier": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --write --ignore-unknown",
-    "prettier:check": "npx eslint-config-prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}'",
-    "prettier:fix": "npm run prettier"
+    "prettier": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --ignore-unknown",
+    "prettier:check": "npm run prettier -l",
+    "prettier:fix": "npm run prettier --write"
   },
   "dependencies": {
     "next": "11.0.1",
