@@ -9,7 +9,7 @@ import HomeFood from '../public/svg/LandingPage/homefood';
 import OfferBg from '../public/svg/LandingPage/offerbg';
 import OfferTemp from '../public/svg/LandingPage/offertemp';
 import OfferDash from '../public/svg/LandingPage/offerdash';
-import OfferLive from '../public/svg/LandingPage/OfferLive';
+import OfferLive from '../public/svg/LandingPage/offerlive';
 import StartedBg from '../public/svg/LandingPage/startedbg';
 import StartedButton from '../public/svg/LandingPage/startedbutton';
 import TestCheeze from '../public/svg/LandingPage/testcheeze';
