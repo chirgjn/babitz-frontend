@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ActiveLink from '../helpers/activelink';
-import { NavLink, Link } from 'react-router-dom';
+import styles from "../styles/sidenav.module.css";
+// import { NavLink, Link } from 'react-router-dom';
 // import Link from 'next/link'
 const Body = styled.div`
 width: 23%;
@@ -10,8 +11,13 @@ overflow-y: auto;
 padding: 0px;
 padding-bottom: 50px;
 margin: 0px;
-background:#28282B;
-  box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.25);
+background: #4B4B60;
+box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.25);
+border-top-right-radius: 25px ;
+border-bottom-right-radius: 25px ;
+`;
+const active = styled.a`
+color:red;
 `;
 
 function Sidenav(){
@@ -26,9 +32,20 @@ function Sidenav(){
     <path d="M1.3252 75.3485L74.6737 2.00002" stroke="white" strokeWidth="3"/>
     <path d="M74.6738 75.3485L1.32533 2.00003" stroke="white" strokeWidth="3"/>
     </svg>
-    <ActiveLink activeClassName="active" href="/">
-           <a className="nav-link">Home</a>
+    <ActiveLink activeClassName={styles.active} href="/DashBoard/statistics">
+    <div>
+    <p>Percentile And Score</p>
+           <div></div>
+
+           </div>
          </ActiveLink>
+         <ActiveLink activeClassName="active" href="/DashBoard/dashBoard">
+         <div>
+         <p>Percentile And Score</p>
+                <div></div>
+
+                </div>
+              </ActiveLink>
 
     </div>
     </Body>
