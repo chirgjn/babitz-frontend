@@ -1,4 +1,4 @@
-function SVG5(){
+function OfferDash(){
   return(      <svg
       width="auto"
       height="60"
@@ -32,4 +32,4 @@ function SVG5(){
       />
     </svg>)
 }
-export default SVG5;
+export default OfferDash;

@@ -4,16 +4,16 @@ import styles from "../styles/Home.module.css";
 import styled from "styled-components";
 import Button from "../components/Button";
 import { useRef } from "react";
-import SVG1 from '../public/svg/LandingPage/svg1';
-import SVG2 from '../public/svg/LandingPage/svg2';
-import SVG3 from '../public/svg/LandingPage/svg3';
-import SVG4 from '../public/svg/LandingPage/svg4';
-import SVG5 from '../public/svg/LandingPage/svg5';
-import SVG6 from '../public/svg/LandingPage/svg6';
-import SVG7 from '../public/svg/LandingPage/svg7';
-import SVG8 from '../public/svg/LandingPage/svg8';
-import SVG9 from '../public/svg/LandingPage/svg9';
-
+import HomeBg from '../public/svg/LandingPage/homebg';
+import HomeFood from '../public/svg/LandingPage/homefood';
+import OfferBg from '../public/svg/LandingPage/offerbg';
+import OfferTemp from '../public/svg/LandingPage/offertemp';
+import OfferDash from '../public/svg/LandingPage/offerdash';
+import OfferLive from '../public/svg/LandingPage/OfferLive';
+import StartedBg from '../public/svg/LandingPage/startedbg';
+import StartedButton from '../public/svg/LandingPage/startedbutton';
+import TestCheeze from '../public/svg/LandingPage/testcheeze';
+import Colors from '../constants/colors';
 import Logo from '../public/svg/logo';
 
 //---------styling-starts----------
@@ -27,7 +27,7 @@ const Navlink = styled.a`
   font-size: 30px;
   line-height: 44px;
   text-align: center;
-  color: black;
+  color: ${Colors.black};
   cursor: pointer;
   &:hover {
     text-decoration: none;
@@ -42,8 +42,8 @@ const Navlink = styled.a`
   }
 `;
 
-const Title = styled.p`
-  color: black;
+const Title = styled.h1`
+color: ${Colors.black};
   font-family: Oswald;
   font-style: normal;
   font-size: 10vw;
@@ -60,13 +60,13 @@ const Title = styled.p`
   }
 `;
 
-const Heading1 = styled.p`
-  color: black;
+const Heading1 = styled.h3`
+color: ${Colors.black};
   font-family: Oswald;
   font-style: normal;
   font-weight: 300;
   font-size: 2.5vw;
-  line-height: 120px;
+  line-height: 90px;
   text-align: center;
   letter-spacing: 0.27em;
   position: absolute;
@@ -78,8 +78,8 @@ const Heading1 = styled.p`
   }
 `;
 
-const Heading2 = styled.p`
-  color: black;
+const Heading2 = styled.h2`
+color: ${Colors.black};
   font-family: Oswald;
   font-style: normal;
   font-weight: 500;
@@ -90,7 +90,7 @@ const Heading2 = styled.p`
   }
 `;
 const NormalText = styled.p`
-  color: grey;
+  color: ${Colors.grey};
   font-family: Oswald;
   font-style: normal;
   font-size: 30px;
@@ -115,19 +115,20 @@ const ButtonDiv = styled.div`
   }
 `;
 
-const Heading3 = styled.p`
-  color: black;
+const Heading3 = styled.h1`
+  color: ${Colors.black};
   font-family: Oswald;
   font-style: normal;
   font-weight: lighter;
   font-size: 25px;
   text-align: center;
+  line-height: 38px;
   @media (max-width: 768px) {
     font-size: 20px;
   }
 `;
 const Heading4 = styled.li`
-  color: black;
+color: ${Colors.black};
   font-family: Oswald;
   font-style: normal;
   font-weight: lighter;
@@ -164,7 +165,6 @@ const Heading3Div = styled.ul`
 export default function Home() {
   let refAbout = useRef(null);
   let refContact = useRef(null);
-
   const aboutClick = () =>
     refAbout.current.scrollIntoView({ behavior: "smooth", block: "start" });
   const contactClick = () =>
@@ -180,7 +180,7 @@ export default function Home() {
 
       {/* --------------Navbar-Start---------------*/}
       <div className="Navbar" style={{ position: "relative" }}>
-      <SVG1/>
+      <HomeBg/>
         <center>
           <div
             className="center"
@@ -200,7 +200,7 @@ export default function Home() {
       <div className="container-fluid">
         <center>
           <div id="Home" style={{ position: "relative" }}>
-           <SVG2/>
+           <HomeFood/>
             <Title>Babitz</Title>
             <Heading1>ORDER, EAT, REPEAT.</Heading1>
             <Button
@@ -280,7 +280,7 @@ export default function Home() {
             position: "relative",
           }}
         >
-        <SVG3/>
+        <OfferBg/>
           <div className="container">
             <Heading2
               style={{ position: "absolute", top: -20, width: "100%", left: 0 }}
@@ -289,7 +289,7 @@ export default function Home() {
             </Heading2>
             <div className="row">
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
-          <SVG4/>
+          <OfferTemp/>
                 <Heading3 style={{ marginTop: "15px" }}>
                   <span style={{ fontWeight: "bold", fontSize: "30px" }}>
                     Multiple Templates
@@ -299,7 +299,7 @@ export default function Home() {
                 </Heading3>
               </div>
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
-              <SVG5/>
+              <OfferDash/>
                 <Heading3 style={{ marginTop: "15px" }}>
                   <span style={{ fontWeight: "bold", fontSize: "30px" }}>
                     Personalised Dashboard
@@ -309,7 +309,7 @@ export default function Home() {
                 </Heading3>
               </div>
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
-                <SVG6/>
+                <OfferLive/>
                 <Heading3 style={{ marginTop: "15px" }}>
                   <span style={{ fontWeight: "bold", fontSize: "30px" }}>
                     Live Edit
@@ -344,7 +344,7 @@ export default function Home() {
           >
             How to Get Started
           </Heading2>
-        <SVG7/>
+        <StartedBg/>
           <div className="container">
             <div className="row">
               <div className="col-sm-5">
@@ -379,7 +379,7 @@ export default function Home() {
                 </Heading3Div>
                <Button>Start Now</Button>
                 <br />
-<SVG8/>
+<StartedButton/>
               </div>
             </div>
           </div>
@@ -421,7 +421,7 @@ export default function Home() {
                <Button style={{ marginTop: "50px" }}>Start Now</Button>
               </div>
               <div className="col-sm-6">
-                <SVG9/>
+                <TestCheeze/>
                 <div
                   className="pizza"
                   style={{ marginLeft: "-100px", marginTop: "-100px" }}

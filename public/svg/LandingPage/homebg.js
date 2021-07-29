@@ -1,4 +1,4 @@
-function SVG1(){
+function HomeBg(){
   return(      <svg
           width="100%"
           height="100%"
@@ -20,4 +20,4 @@ function SVG1(){
           />
         </svg>)
 }
-export default SVG1;
+export default HomeBg;

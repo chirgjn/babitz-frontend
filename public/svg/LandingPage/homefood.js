@@ -1,4 +1,4 @@
-function SVG2(){
+function HomeFood(){
   return(       <svg
       style={{ marginTop: "-200px" }}
       width="100%"
@@ -173,4 +173,4 @@ function SVG2(){
       </defs>
     </svg>)
 }
-export default SVG2;
+export default HomeFood;

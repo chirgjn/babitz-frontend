@@ -1,4 +1,5 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
+import '../Bootstrap/css/bootstrap.min.css';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -10,10 +11,6 @@ function MyApp({ Component, pageProps }) {
         <link
           href="https://fonts.googleapis.com/css?family=Oswald"
           rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
         />
         <Component {...pageProps} />
       </div>

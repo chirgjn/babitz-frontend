@@ -1,4 +1,4 @@
-function SVG6(){
+function OfferLive(){
   return(        <svg
     width="auto"
     height="60"
@@ -13,4 +13,4 @@ function SVG6(){
     />
   </svg>)
 }
-export default SVG6;
+export default OfferLive;

@@ -1,4 +1,4 @@
-function SVG7(){
+function StartedBg(){
   return(      <svg
       width="100%"
       height="100%"
@@ -20,4 +20,4 @@ function SVG7(){
       />
     </svg>)
 }
-export default SVG7;
+export default StartedBg;

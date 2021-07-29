@@ -5,7 +5,7 @@ const Images = styled.svg`
     display: none;
   }
 `;
-function SVG8(){
+function StartedButton(){
   return(      <Images
       style={{
         margin: "-10px 0px 0px -150px",
@@ -32,4 +32,4 @@ function SVG8(){
       />
     </Images>)
 }
-export default SVG8;
+export default StartedButton;

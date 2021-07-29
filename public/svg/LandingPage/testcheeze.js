@@ -5,7 +5,7 @@ const Images = styled.svg`
     display: none;
   }
 `;
-function SVG9(){
+function TestCheeze(){
   return(      <Images
                   style={{ marginTop: "200px", marginLeft: "-80px" }}
                   width="300"
@@ -72,4 +72,4 @@ function SVG9(){
                   />
                 </Images>)
 }
-export default SVG9;
+export default TestCheeze;

@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import Colors from '../constants/colors';
 
 const Button = styled.button`
   width: 250px;
-  background: #ffc535;
+  background: ${Colors.buttonyellow};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: none;
   border-radius: 25px;

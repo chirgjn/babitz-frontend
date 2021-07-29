@@ -1,4 +1,4 @@
-function SVG4(){
+function OfferTemp(){
   return(           <svg
           width="auto"
           height="60"
@@ -32,4 +32,4 @@ function SVG4(){
           />
         </svg>)
 }
-export default SVG4;
+export default OfferTemp;
