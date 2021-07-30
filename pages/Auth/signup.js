@@ -94,10 +94,30 @@ function Signup() {
     if (!user) {
       throw new Error("There was an issue authorizing");
     }
+    var formdata = new FormData();
     if (result.additionalUserInfo.isNewUser) {
       setAuthorizing(false);
-      router.push("/Template/chooseTemplate");
-    } else if (!result.additionalUserInfo.isNewUser) {
+      var requestOptions = {
+        method: 'POST',
+        body: JSON.stringify(formdata),
+        redirect: 'follow',
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': user.Aa,
+            },
+      };
+      fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
+      .then((response) => response.json())
+   .then((json) => {
+     console.log(json);
+     router.push("/Template/chooseTemplate");
+   })
+   .catch((error)=>{
+     console.log(error);
+   });
+    }
+     else if (!result.additionalUserInfo.isNewUser) {
       setAuthorizing(false);
       router.push("/Dashboard/dashboard");
     }

@@ -7,6 +7,8 @@ import Loader from "../Components/Loader";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import Edit from '../../helpers/edittemp';
+import firebase from "firebase/app";
+
 //----------style-starts---------
 
 const Logo = styled.p`
@@ -124,10 +126,11 @@ const Address = styled.p`
 
 function EditTemplate() {
   const router = useRouter();
+  const user = firebase.auth().currentUser;
 
-  const [restname, setRestname] = useState("Babitz");
-  const [restdescr, setRestdescr] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-  const [restaddress, setRestaddress] = useState("21st Street, New York The USA");
+  const [restname, setRestname] = useState("");
+  const [restdescr, setRestdescr] = useState("");
+  const [restaddress, setRestaddress] = useState("");
   const [modalname, setModalname] = useState("");
   const [modaltype, setModaltype] = useState("");
   const [modalfunc, setModalfunc] = useState("");
@@ -135,11 +138,71 @@ function EditTemplate() {
   const [changefunc, setChangefunc] = useState("");
 
 
+  useEffect(() => {
+  async function getRest(){
+      var requestOptions = {
+        redirect: 'follow',
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': user.Aa,
+        },
+      };
+      const response = await fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
+      const restauarnt = await response.json();
+      console.log(restauarnt);
+      if(restauarnt.name){
+        setRestname(restauarnt.name);
+      }
+      else{
+        setRestname("Babitz");
+      }
+      if(restauarnt.description){
+        setRestdescr(restauarnt.description);
+      }
+      else{
+        setRestdescr("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+      }
+      if(restauarnt.address){
+        setRestaddress(restauarnt.address);
+      }
+      else{
+        setRestaddress("21st Street, New York The USA");
+      }
+    }
+    getRest();
+  },[user]);
+
   const changeTemplate = () => {
     router.push("/Template/chooseTemplate");
   };
-  const saveAndnext = () => {
-    router.push("/Dashboard/dashboard");
+  const saveAndnext = (e) => {
+    e.preventDefault();
+    var formdata = new FormData();
+    formdata["name"] = restname;
+    formdata["description"] = restdescr;
+    formdata["address"] = restaddress;
+    console.log(JSON.stringify(formdata));
+    var requestOptions = {
+      method: 'PATCH',
+      body: JSON.stringify(formdata),
+      redirect: 'follow',
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': user.Aa,
+          },
+    };
+    fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
+    .then((response) => response.json())
+ .then((json) => {
+   console.log(json);
+   router.push("/Dashboard/dashboard");
+ })
+ .catch((error)=>{
+   console.log(error);
+ });
+
   };
   return (
     <div>
@@ -315,7 +378,7 @@ function EditTemplate() {
             <div className="col-sm-1"></div>
           </div>
           <Button onClick={changeTemplate}>Change Template</Button>
-          <Button
+          <Button type="submit"
             onClick={saveAndnext}
             style={{ float: "right", marginLeft: "10px" }}
           >
