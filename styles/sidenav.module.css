@@ -1,3 +1,7 @@
 .active{
   color:red;
+  border-right: 10px solid #FBB300;
+  background:  linear-gradient(180deg, rgba(248, 235, 209, 0.8) 28.13%, rgba(248, 235, 209, 0) 100%);
+  /* padding: 1px; */
+  /* opacity: 0.5; */
 }
