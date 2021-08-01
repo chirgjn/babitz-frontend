@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import styled from "styled-components";
 import { useRef } from "react";
-import HomeBg from "../public/svg/LandingPage/HomeBg.js";
+import HomeBg from "../public/svg/LandingPage/HomeBg";
 import HomeFood from "../public/svg/LandingPage/HomeFood";
 import OfferBg from "../public/svg/LandingPage/OfferBg";
 import OfferTemp from "../public/svg/LandingPage/OfferTemp";
