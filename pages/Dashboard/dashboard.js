@@ -2,110 +2,101 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import withAuth from "../../helpers/withAuth";
-import firebase from "firebase/app";
 import { useEffect, useState } from "react";
 import Loader from "../Components/Loader";
 import Sidenav from "../../components/Sidenav";
+import Profile from "../../components/Profile";
 import styled from "styled-components";
+import Chart from "react-apexcharts";
 
+//-------style
 
-//----------------styles
-
-
-const Heading = styled.h4`
-/* margin-top:10px; */
-font-family: Oswald;
-font-style: normal;
-font-weight: normal;
-font-size: 30px;
-line-height: 50px;
-/* or 100% */
-
-text-align: center;
-letter-spacing: 0.03em;
-
-color: #4B4B60;
-/* border-bottom:10px solid #FBB300; */
-max-width:200px;
+const Box = styled.div`
+  background: #f8ebd1;
+  border-radius: 25px;
+  padding: 5px 10px 10px 10px;
+  margin-bottom: 20px;
 `;
-const Label = styled.label`
-float:left;
-color:#4B4B60;
-font-family: Oswald;
-letter-spacing:3px;
-`;
-const SubmitButton = styled.button`
-background: #FFC535;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border:none;
-border-radius: 25px;
-  float:left;
-  margin-top:30px;
-  width:100%;
-  color:#4B4B60;
+
+const Heading = styled.h6`
   font-family: Oswald;
-  letter-spacing:3px;
-  &:hover{
-    color:#FFC535;
-    background:#4B4B60;
-  }
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  color: #000000;
 `;
 
+const NormalText = styled.p`
+  font-family: Oswald;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 17px;
+  color: #000000;
+  letter-spacing: 2px;
+`;
 function Dashboard() {
-  const [select, setSelect] = useState("add");
-  const [itemname, setItemname] = useState("");
-  const [itemprice, setItemprice] = useState(0);
-  const [itemdescr, setItemdescr] = useState("");
-  const user = firebase.auth().currentUser;
+  const [loading, setLoading] = useState(true);
 
-  function signOut() {
-    // [START auth_sign_out]
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        currentUser();
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-    // [END auth_sign_out]
-  }
-  const set_itemname=(event)=>{
-    setItemname(event.target.value);
-  }
-  const set_itemprice=(event)=>{
-    setItemprice(event.target.value);
-  }
-  const set_itemdescr=(event)=>{
-    setItemdescr(event.target.value);
-  }
-  const submit_item=(e)=>{
-    e.preventDefault();
-    var formdata = new FormData();
-    formdata["name"] = itemname;
-    formdata["price"] = Number(itemprice);
-    formdata["description"] = itemdescr;
-    console.log(formdata);
-    var requestOptions = {
-      method: 'POST',
-      body: JSON.stringify([formdata]),
-      redirect: 'follow',
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': user.Aa,
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+  var chartdata = {
+    options: {
+      colors: ["#FFC535", "#FFC535"],
+      chart: {
+        height: 380,
+        width: "100%",
+        type: "area",
+        animations: {
+          initialAnimation: {
+            enabled: true,
           },
-    };
-    fetch("https://babitz-backend.herokuapp.com/addItems", requestOptions)
-    .then((response) => response.json())
- .then((json) => {console.log(json)
- })
- .catch((error)=>{
-   console.log(error);
- })
- document.getElementById("inventoryForm").reset();
+        },
+        zoom: {
+          enabled: true,
+          type: "x",
+          resetIcon: {
+            offsetX: -10,
+            offsetY: 0,
+            fillColor: "#fff",
+            strokeColor: "#37474F",
+          },
+        },
+      },
+      stroke: {
+        show: false,
+        curve: "smooth",
+      },
+      yaxis: {
+        title: {
+          text: "Amount in Rupees",
+        },
+      },
+      grid: {
+        show: false,
+      },
+
+      dataLabels: {
+        style: {
+          colors: ["#EA7A26", "#E91E63", "#9C27B0"],
+        },
+      },
+      xaxis: {
+        categories: [0, 1, 2, 3, 4, 5, 6, 7],
+        title: {
+          text: "Number of Days",
+        },
+      },
+    },
+    series: [
+      {
+        name: "",
+        data: [300, 200, 700, 600, 1000, 500],
+      },
+    ],
+  };
+  if (loading == true) {
+    return <Loader />;
   }
   return (
     <div>
@@ -117,71 +108,49 @@ function Dashboard() {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-3">
-            <Sidenav/>
+            <Sidenav />
           </div>
           <div className="col-md-9">
-
-          <svg style={{float:'right', marginTop:'10px'}} width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M49.5 24.9999C49.5 38.5309 38.531 49.4999 25 49.4999C11.469 49.4999 0.5 38.5309 0.5 24.9999C0.5 11.469 11.469 0.5 25 0.5C38.531 0.5 49.5 11.469 49.5 24.9999Z" fill="#F8EBD1" stroke="#4B4B60"/>
-      <path d="M44.41 40.7485C42.0675 43.6382 39.1093 45.9683 35.7514 47.5689C32.3935 49.1694 28.7206 50 25.0007 50C21.2808 50 17.6079 49.1694 14.25 47.5689C10.8921 45.9683 7.93393 43.6382 5.59143 40.7485C8.74188 36.8989 13.0968 34.2222 17.9543 33.15C17.8573 35.1991 18.2205 37.2439 19.0171 39.1343C20.3957 35.9914 25.0014 35.7057 25.0014 35.7057C25.0014 35.7057 29.6071 35.9814 30.9457 39.1343C31.7627 37.25 32.1267 35.2004 32.0086 33.15C36.1429 34.2128 41.1814 36.3785 44.41 40.7485Z" fill="#4B4B60"/>
-      <path d="M30.6314 30.7084C30.6314 30.7084 30.9071 33.5427 25.0013 35.7484C25.0013 35.7484 29.6071 36.0241 30.9456 39.177C31.0256 39.2513 33.6628 32.4013 30.6314 30.7084Z" fill="#FBB300"/>
-      <path d="M19.37 30.7084C16.3386 32.4013 18.9757 39.2513 19.0557 39.137C20.4343 35.9941 25 35.7084 25 35.7084C19.0943 33.5427 19.37 30.7084 19.37 30.7084Z" fill="#FBB300"/>
-      <path d="M29.2917 6.96855C29.606 3.34713 23.8631 3.58284 23.8631 3.58284C21.4537 3.87958 19.2072 4.95565 17.4659 6.64718C15.7246 8.33871 14.5839 10.553 14.2174 12.9528L15.3988 11.5357C13.5417 15.5914 16.3431 22.5599 16.5803 23.1071C18.0374 27.9499 21.266 32.3928 25.0088 32.3928C28.7517 32.3928 31.9774 27.9442 33.4374 23.1071V23.0671C33.5945 22.4771 33.7517 21.8857 33.866 21.2957H33.826C34.6131 18.1528 35.4788 14.9571 35.4788 14.9571C37.7174 3.66141 29.2917 6.96855 29.2917 6.96855ZM33.2674 20.7485C32.944 23.1931 31.8232 25.4627 30.0788 27.2056C29.7444 27.5301 29.3893 27.8326 29.016 28.1113L28.386 26.1428H21.6145L20.9845 28.1513C19.7245 27.2071 17.0874 24.5685 17.0474 22.0885C15.9446 7.95426 26.7717 10.9457 26.7717 10.9457C34.056 10.3942 33.8188 16.8114 33.2688 20.7485H33.2674Z" fill="#4B4B60"/>
-      <path d="M22.2444 27.48C22.5894 27.8719 23.0131 28.1866 23.4879 28.4037C23.9627 28.6209 24.478 28.7354 25.0001 28.74C25.5236 28.744 26.0416 28.6333 26.5177 28.4156C26.9938 28.1979 27.4164 27.8786 27.7558 27.48H22.2444Z" fill="white"/>
-      </svg>
-
-      <button onClick={signOut}>Sign Out</button>
-
-      <center>
-      <div className="row" style={{marginTop:'100px'}}>
-      <div className="col-xs-6">
-      {select=="add"?(
-        <Heading style={{borderBottom:'10px solid #FBB300'}} onClick={()=> setSelect("add")}>Add Inventory</Heading>
-      ):(
-        <Heading onClick={()=> setSelect("add")}>Add Inventory</Heading>
-      )}
-      </div>
-      <div className="col-xs-6">
-      {select=="list"?(
-        <Heading style={{borderBottom:'10px solid #FBB300'}} onClick={()=> setSelect("list")}>List Of Inventory</Heading>
-      ):(
-        <Heading onClick={()=> setSelect("list")}>List Of Inventory</Heading>
-      )}
-         </div>
-      </div>
-      <form id="inventoryForm" onSubmit={submit_item}>
-      <div className="row" style={{marginTop:'40px'}}>
-      <div className="col-sm-1">
-      </div>
-      <div className="col-sm-5">
-      <Label>Item Name</Label>
-      <input type="text" className="form-control" onChange={set_itemname} placeholder="Food Item Name" required/>
-      </div>
-      <div className="col-sm-5">
-      <Label>Item Price</Label>
-      <input type="number" className="form-control" onChange={set_itemprice} placeholder="Price in Rupees" required/>
-      </div>
-      <div className="col-sm-1">
-      </div>
-      </div>
-      <div className="row" style={{marginTop:'30px'}}>
-      <div className="col-sm-1">
-      </div>
-      <div className="col-sm-5">
-      <Label>Item Description</Label>
-      <textarea rows='5' className="form-control" onChange={set_itemdescr} placeholder="Food Item Description" required/>
-      </div>
-      <div className="col-sm-5">
-      <Label>Item Image</Label>
-      <input type="file" accept="image/*" className="form-control"/>
-      <SubmitButton style={{outline:'none'}} type="submit" className="btn btn-primary">Submit</SubmitButton>
-      </div>
-      <div className="col-sm-1">
-      </div>
-      </div>
-      </form>
-
-      </center>
+            <div style={{ paddingBottom: "20px" }}>
+              <Profile />
+            </div>
+            <div className="row" style={{ marginTop: "100px" }}>
+              <div class="col-sm-3">
+                <Box>
+                  <Heading>Best Selling Item</Heading>
+                  <NormalText>Cholle Bhaute</NormalText>
+                </Box>
+              </div>
+              <div class="col-sm-3">
+                <Box>
+                  <Heading>New Orders</Heading>
+                  <NormalText>10</NormalText>
+                </Box>
+              </div>
+              <div class="col-sm-3">
+                <Box>
+                  <Heading>Total Sales</Heading>
+                  <NormalText>120</NormalText>
+                </Box>
+              </div>
+              <div class="col-sm-3">
+                <Box>
+                  <Heading>Total Income</Heading>
+                  <NormalText>₹ 10000</NormalText>
+                </Box>
+              </div>
+            </div>
+            <div
+              style={{ overflowX: "auto", overflowY: "hidden", zIndex: "0" }}
+            >
+              <Chart
+                options={chartdata.options}
+                series={chartdata.series}
+                type="area"
+                width="95%"
+                height="400px"
+              />
+            </div>
           </div>
         </div>
       </div>
