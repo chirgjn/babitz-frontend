@@ -2,105 +2,31 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import styled from "styled-components";
-import Button from "../components/Button";
 import { useRef } from "react";
-import HomeBg from '../public/svg/LandingPage/homebg';
-import HomeFood from '../public/svg/LandingPage/homefood';
-import OfferBg from '../public/svg/LandingPage/offerbg';
-import OfferTemp from '../public/svg/LandingPage/offertemp';
-import OfferDash from '../public/svg/LandingPage/offerdash';
-import OfferLive from '../public/svg/LandingPage/offerlive';
-import StartedBg from '../public/svg/LandingPage/startedbg';
-import StartedButton from '../public/svg/LandingPage/startedbutton';
-import TestCheeze from '../public/svg/LandingPage/testcheeze';
-import Colors from '../constants/colors';
-import Logo from '../public/svg/logo';
+import HomeBg from "../public/svg/LandingPage/HomeBg.js";
+import HomeFood from "../public/svg/LandingPage/HomeFood";
+import OfferBg from "../public/svg/LandingPage/OfferBg";
+import OfferTemp from "../public/svg/LandingPage/OfferTemp";
+import OfferDash from "../public/svg/LandingPage/OfferDash";
+import OfferLive from "../public/svg/LandingPage/OfferLive";
+import StartedBg from "../public/svg/LandingPage/StartedBg";
+import StartedButton from "../public/svg/LandingPage/StartedButton";
+import TestCheeze from "../public/svg/LandingPage/TestCheeze";
+import Colors from "../constants/colors";
+import Logo from "../public/svg/Logo";
+
+import Button from "../components/Button";
+import Navlink from "../components/LandingPage/Navlink";
+import Title from "../components/LandingPage/Title";
+import Heading1 from "../components/LandingPage/Heading1";
+import Heading2 from "../components/LandingPage/Heading2";
+import NormalText from "../components/LandingPage/NormalText";
+import ButtonDiv from "../components/LandingPage/ButtonDiv";
+import Heading3 from "../components/LandingPage/Heading3";
+import StartedItems from "../components/LandingPage/StartedItems";
+import StartedList from "../components/LandingPage/StartedList";
 
 //---------styling-starts----------
-
-
-const Navlink = styled.a`
-  margin: 30px;
-  font-family: Oswald;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 30px;
-  line-height: 44px;
-  text-align: center;
-  color: ${Colors.black};
-  cursor: pointer;
-  &:hover {
-    text-decoration: none;
-    color: grey;
-  }
-  &:after {
-    text-decoration: none;
-    /* color:black; */
-  }
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const Title = styled.h1`
-color: ${Colors.black};
-  font-family: Oswald;
-  font-style: normal;
-  font-size: 10vw;
-  line-height: 0px;
-  text-align: center;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  left: 0;
-  margin-top: -70px;
-  @media (max-width: 768px) {
-    margin-top: 0px;
-    font-size: 60px;
-  }
-`;
-
-const Heading1 = styled.h3`
-color: ${Colors.black};
-  font-family: Oswald;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 2.5vw;
-  line-height: 90px;
-  text-align: center;
-  letter-spacing: 0.27em;
-  position: absolute;
-  width: 100%;
-  left: 0;
-  top: 0;
-  @media (max-width: 768px) {
-    font-size: 20px;
-  }
-`;
-
-const Heading2 = styled.h2`
-color: ${Colors.black};
-  font-family: Oswald;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 55px;
-  text-align: center;
-  @media (max-width: 768px) {
-    font-size: 30px;
-  }
-`;
-const NormalText = styled.p`
-  color: ${Colors.grey};
-  font-family: Oswald;
-  font-style: normal;
-  font-size: 30px;
-  text-align: center;
-  width: 450px;
-  @media (max-width: 768px) {
-    font-size: 25px;
-    width: 100%;
-  }
-`;
 
 const ImageDiv = styled.div`
   margin-top: -200px;
@@ -108,57 +34,6 @@ const ImageDiv = styled.div`
     display: none;
   }
 `;
-
-const ButtonDiv = styled.div`
-  @media (max-width: 950px) {
-    margin-top: 200px;
-  }
-`;
-
-const Heading3 = styled.h1`
-  color: ${Colors.black};
-  font-family: Oswald;
-  font-style: normal;
-  font-weight: lighter;
-  font-size: 25px;
-  text-align: center;
-  line-height: 38px;
-  @media (max-width: 768px) {
-    font-size: 20px;
-  }
-`;
-const Heading4 = styled.li`
-color: ${Colors.black};
-  font-family: Oswald;
-  font-style: normal;
-  font-weight: lighter;
-  font-size: 25px;
-  text-align: center;
-  list-style: "❑";
-  padding: 17px;
-  border-left: 2px solid grey;
-  @media (max-width: 768px) {
-    font-size: 20px;
-  }
-`;
-
-const Heading3Div = styled.ul`
-  position: absolute;
-  top: -450px;
-  width: 80%;
-  left: 100px;
-  padding: 20px;
-  @media (max-width: 950px) {
-    width: 100%;
-    left: 0px;
-    margin-top: -350px;
-    position: static;
-  }
-  @media (max-width: 768px) {
-    margin-top: -150px;
-  }
-`;
-
 
 //------------styling-ends----------
 
@@ -180,7 +55,7 @@ export default function Home() {
 
       {/* --------------Navbar-Start---------------*/}
       <div className="Navbar" style={{ position: "relative" }}>
-      <HomeBg/>
+        <HomeBg />
         <center>
           <div
             className="center"
@@ -188,8 +63,8 @@ export default function Home() {
           >
             <Navlink>Home</Navlink>
             <Navlink onClick={aboutClick}>About Us</Navlink>
-            <Logo/>
-          <Navlink onClick={contactClick}>Contact Us</Navlink>
+            <Logo />
+            <Navlink onClick={contactClick}>Contact Us</Navlink>
             <Navlink href="#news">SignIn</Navlink>
           </div>
         </center>
@@ -200,7 +75,7 @@ export default function Home() {
       <div className="container-fluid">
         <center>
           <div id="Home" style={{ position: "relative" }}>
-           <HomeFood/>
+            <HomeFood />
             <Title>Babitz</Title>
             <Heading1>ORDER, EAT, REPEAT.</Heading1>
             <Button
@@ -248,7 +123,7 @@ export default function Home() {
               />
             </ImageDiv>
             <ButtonDiv>
-             <Button
+              <Button
                 style={{
                   position: "absolute",
                   left: "50%",
@@ -280,7 +155,7 @@ export default function Home() {
             position: "relative",
           }}
         >
-        <OfferBg/>
+          <OfferBg />
           <div className="container">
             <Heading2
               style={{ position: "absolute", top: -20, width: "100%", left: 0 }}
@@ -289,7 +164,7 @@ export default function Home() {
             </Heading2>
             <div className="row">
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
-          <OfferTemp/>
+                <OfferTemp />
                 <Heading3 style={{ marginTop: "15px" }}>
                   <span style={{ fontWeight: "bold", fontSize: "30px" }}>
                     Multiple Templates
@@ -299,7 +174,7 @@ export default function Home() {
                 </Heading3>
               </div>
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
-              <OfferDash/>
+                <OfferDash />
                 <Heading3 style={{ marginTop: "15px" }}>
                   <span style={{ fontWeight: "bold", fontSize: "30px" }}>
                     Personalised Dashboard
@@ -309,7 +184,7 @@ export default function Home() {
                 </Heading3>
               </div>
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
-                <OfferLive/>
+                <OfferLive />
                 <Heading3 style={{ marginTop: "15px" }}>
                   <span style={{ fontWeight: "bold", fontSize: "30px" }}>
                     Live Edit
@@ -344,7 +219,7 @@ export default function Home() {
           >
             How to Get Started
           </Heading2>
-        <StartedBg/>
+          <StartedBg />
           <div className="container">
             <div className="row">
               <div className="col-sm-5">
@@ -360,26 +235,26 @@ export default function Home() {
                 </ImageDiv>
               </div>
               <div className="col-sm-7">
-                <Heading3Div>
-                  <Heading4>
+                <StartedList>
+                  <StartedItems>
                     {" "}
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Nunc sit amet quam ac mi
-                  </Heading4>
-                  <Heading4>
+                  </StartedItems>
+                  <StartedItems>
                     {" "}
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Nunc sit amet quam ac mi
-                  </Heading4>
-                  <Heading4>
+                  </StartedItems>
+                  <StartedItems>
                     {" "}
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Nunc sit amet quam ac mi
-                  </Heading4>
-                </Heading3Div>
-               <Button>Start Now</Button>
+                  </StartedItems>
+                </StartedList>
+                <Button>Start Now</Button>
                 <br />
-<StartedButton/>
+                <StartedButton />
               </div>
             </div>
           </div>
@@ -418,10 +293,10 @@ export default function Home() {
                     consectetur adipiscing elit. Nunc sit amet quam ac mi’{" "}
                   </Heading3>
                 </div>
-               <Button style={{ marginTop: "50px" }}>Start Now</Button>
+                <Button style={{ marginTop: "50px" }}>Start Now</Button>
               </div>
               <div className="col-sm-6">
-                <TestCheeze/>
+                <TestCheeze />
                 <div
                   className="pizza"
                   style={{ marginLeft: "-100px", marginTop: "-100px" }}
