@@ -1,5 +1,4 @@
-function OfferDash(){
-  return(      <svg
+<svg
       width="auto"
       height="60"
       viewBox="0 0 78 73"
@@ -30,6 +29,4 @@ function OfferDash(){
         stroke="black"
         strokeWidth="2"
       />
-    </svg>)
-}
-export default OfferDash;
+    </svg>

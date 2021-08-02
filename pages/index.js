@@ -3,13 +3,13 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import styled from "styled-components";
 import { useRef } from "react";
-import HomeBg from "../public/svg/LandingPage/HomeBg";
+// import HomeBg from "../public/svg/LandingPage/HomeBg.svg";
 import HomeFood from "../public/svg/LandingPage/HomeFood";
-import OfferBg from "../public/svg/LandingPage/OfferBg";
-import OfferTemp from "../public/svg/LandingPage/OfferTemp";
-import OfferDash from "../public/svg/LandingPage/OfferDash";
-import OfferLive from "../public/svg/LandingPage/OfferLive";
-import StartedBg from "../public/svg/LandingPage/StartedBg";
+// import OfferBg from "../public/svg/LandingPage/OfferBg";
+// import OfferTemp from "../public/svg/LandingPage/OfferTemp";
+// import OfferDash from "../public/svg/LandingPage/OfferDash";
+// import OfferLive from "../public/svg/LandingPage/OfferLive";
+// import StartedBg from "../public/svg/LandingPage/StartedBg";
 import StartedButton from "../public/svg/LandingPage/StartedButton";
 import TestCheeze from "../public/svg/LandingPage/TestCheeze";
 import Colors from "../constants/colors";
@@ -21,7 +21,7 @@ import Title from "../components/LandingPage/Title";
 import Heading1 from "../components/LandingPage/Heading1";
 import Heading2 from "../components/LandingPage/Heading2";
 import NormalText from "../components/LandingPage/NormalText";
-import ButtonDiv from "../components/LandingPage/ButtonDiv";
+import ButtonWrapper from "../components/LandingPage/ButtonWrapper";
 import Heading3 from "../components/LandingPage/Heading3";
 import StartedItems from "../components/LandingPage/StartedItems";
 import StartedList from "../components/LandingPage/StartedList";
@@ -55,7 +55,12 @@ export default function Home() {
 
       {/* --------------Navbar-Start---------------*/}
       <div className="Navbar" style={{ position: "relative" }}>
-        <HomeBg />
+        <Image
+          src="/svg/landingpage/homebg.svg"
+          layout="responsive"
+          height="100%"
+          width="363%"
+        />
         <center>
           <div
             className="center"
@@ -122,7 +127,7 @@ export default function Home() {
                 objectFit="contain"
               />
             </ImageDiv>
-            <ButtonDiv>
+            <ButtonWrapper>
               <Button
                 style={{
                   position: "absolute",
@@ -133,7 +138,7 @@ export default function Home() {
               >
                 Start Now
               </Button>
-            </ButtonDiv>
+            </ButtonWrapper>
             <div
               style={{
                 borderBottom: "2px solid rgba(0, 0, 0, 0.35)",
@@ -155,7 +160,12 @@ export default function Home() {
             position: "relative",
           }}
         >
-          <OfferBg />
+          <Image
+            src="/svg/landingpage/OfferBg.svg"
+            layout="responsive"
+            height="100%"
+            width="395%"
+          />
           <div className="container">
             <Heading2
               style={{ position: "absolute", top: -20, width: "100%", left: 0 }}
@@ -164,7 +174,12 @@ export default function Home() {
             </Heading2>
             <div className="row">
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
-                <OfferTemp />
+                <Image
+                  src="/svg/landingpage/offertemp.svg"
+                  layout="fixed"
+                  height="60px"
+                  width="100%"
+                />
                 <Heading3 style={{ marginTop: "15px" }}>
                   <span style={{ fontWeight: "bold", fontSize: "30px" }}>
                     Multiple Templates
@@ -174,7 +189,12 @@ export default function Home() {
                 </Heading3>
               </div>
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
-                <OfferDash />
+                <Image
+                  src="/svg/landingpage/offerdash.svg"
+                  layout="fixed"
+                  height="60px"
+                  width="100%"
+                />
                 <Heading3 style={{ marginTop: "15px" }}>
                   <span style={{ fontWeight: "bold", fontSize: "30px" }}>
                     Personalised Dashboard
@@ -184,7 +204,12 @@ export default function Home() {
                 </Heading3>
               </div>
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
-                <OfferLive />
+                <Image
+                  src="/svg/landingpage/offerlive.svg"
+                  layout="fixed"
+                  height="60px"
+                  width="100%"
+                />
                 <Heading3 style={{ marginTop: "15px" }}>
                   <span style={{ fontWeight: "bold", fontSize: "30px" }}>
                     Live Edit
@@ -215,11 +240,22 @@ export default function Home() {
       <center>
         <div id="Started" style={{ position: "relative" }}>
           <Heading2
-            style={{ position: "absolute", top: -15, width: "100%", left: 0 }}
+            style={{
+              position: "absolute",
+              top: -15,
+              width: "100%",
+              left: 0,
+              zIndex: 1,
+            }}
           >
             How to Get Started
           </Heading2>
-          <StartedBg />
+          <Image
+            src="/svg/landingpage/startedbg.svg"
+            layout="responsive"
+            height="100%"
+            width="194%"
+          />
           <div className="container">
             <div className="row">
               <div className="col-sm-5">
@@ -310,7 +346,7 @@ export default function Home() {
                     height="50px"
                     objectFit="contain"
                   />
-                  <style jsx global>{`
+                  <style jsx>{`
                     @media (max-width: 768px) {
                       .pizza {
                         display: none;
