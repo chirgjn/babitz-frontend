@@ -8,7 +8,7 @@ import Loader from "../Components/Loader";
 import styled from "styled-components";
 import styles from "../../styles/chooseTemplate.module.css";
 import { useRouter } from "next/router";
-import Error from 'next/error';
+import Error from "next/error";
 //---------styling-starts----------
 
 const Navbar = styled.div`
@@ -87,7 +87,7 @@ function ChooseTemplate() {
   );
   const user = firebase.auth().currentUser;
 
-
+  console.log(user);
   const choose_Template = (event) => {
     let value = event.target.value;
     setTemplate_id(value);
@@ -110,26 +110,27 @@ function ChooseTemplate() {
   };
 
   const save_Template = () => {
-    if(template_id!=3){
-    var formdata = new FormData();
-    formdata.append("templateId", template_id);
-    var requestOptions = {
-      method: 'POST',
-      body: formdata,
-      redirect: 'follow',
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': user.Aa,
-          },
-    };
-    fetch("https://babitz-backend.herokuapp.com/restaurants", requestOptions)
-    .then((response) => response.json())
- .then((json) => {console.log(json)});
-}
-else{
-  alert('This template is not avaiable currently');
-}
+    if (template_id != 3) {
+      var formdata = new FormData();
+      formdata.append("templateId", template_id);
+      var requestOptions = {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: user.Aa,
+        },
+      };
+      fetch("https://babitz-backend.herokuapp.com/restaurants", requestOptions)
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+        });
+    } else {
+      alert("This template is not avaiable currently");
+    }
   };
   return (
     <div>
