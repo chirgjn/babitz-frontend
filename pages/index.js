@@ -56,7 +56,8 @@ export default function Home() {
       {/* --------------Navbar-Start---------------*/}
       <div className="Navbar" style={{ position: "relative" }}>
         <Image
-          src="/svg/landingpage/homebg.svg"
+          alt=""
+          src="/svg/LandingPage/homebg.svg"
           layout="responsive"
           height="100%"
           width="363%"
@@ -161,7 +162,8 @@ export default function Home() {
           }}
         >
           <Image
-            src="/svg/landingpage/OfferBg.svg"
+            alt=""
+            src="/svg/LandingPage/OfferBg.svg"
             layout="responsive"
             height="100%"
             width="395%"
@@ -175,7 +177,8 @@ export default function Home() {
             <div className="row">
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
                 <Image
-                  src="/svg/landingpage/offertemp.svg"
+                  alt=""
+                  src="/svg/LandingPage/offertemp.svg"
                   layout="fixed"
                   height="60px"
                   width="100%"
@@ -190,7 +193,8 @@ export default function Home() {
               </div>
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
                 <Image
-                  src="/svg/landingpage/offerdash.svg"
+                  alt=""
+                  src="/svg/LandingPage/offerdash.svg"
                   layout="fixed"
                   height="60px"
                   width="100%"
@@ -205,7 +209,8 @@ export default function Home() {
               </div>
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
                 <Image
-                  src="/svg/landingpage/offerlive.svg"
+                  alt=""
+                  src="/svg/LandingPage/offerlive.svg"
                   layout="fixed"
                   height="60px"
                   width="100%"
@@ -251,7 +256,8 @@ export default function Home() {
             How to Get Started
           </Heading2>
           <Image
-            src="/svg/landingpage/startedbg.svg"
+            alt=""
+            src="/svg/LandingPage/startedbg.svg"
             layout="responsive"
             height="100%"
             width="194%"
