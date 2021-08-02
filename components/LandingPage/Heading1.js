@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Colors from "../../constants/colors";
 
-const Heading1 = styled.h3`
+const Heading1 = styled.h1`
   color: ${Colors.black};
   font-family: Oswald;
   font-style: normal;
