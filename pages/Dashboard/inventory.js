@@ -57,6 +57,7 @@ function Inventory() {
   const [itemname, setItemname] = useState("");
   const [itemprice, setItemprice] = useState(0);
   const [itemdescr, setItemdescr] = useState("");
+  const [itemimage, setItemimage] = useState("");
   const [items, setItems] = useState([]);
   const [currentitem, setCurrentitem] = useState("");
   const [newitemname, setNewitemname] = useState("");
@@ -107,6 +108,9 @@ function Inventory() {
   const set_itemdescr = (event) => {
     setItemdescr(event.target.value);
   };
+  const set_itemimage = (event) => {
+    setItemimage(event.target.files[0]);
+  };
   const set_newitemname = (event) => {
     setNewitemname(event.target.value);
   };
@@ -117,7 +121,6 @@ function Inventory() {
     setNewitemdescr(event.target.value);
   };
   const set_newitemstatus = (event) => {
-    console.log(event.target.value);
     setNewitemstatus(eval(event.target.value));
   };
   const submit_item = (e) => {
@@ -142,6 +145,31 @@ function Inventory() {
         let add = items;
         add.push(json[0]);
         setItems(add);
+        if (itemimage) {
+          var formdata1 = new FormData();
+          formdata1.append("file", itemimage);
+          var requestOptions1 = {
+            method: "POST",
+            body: formdata1,
+            redirect: "follow",
+            headers: {
+              Accept: "application/json",
+              Authorization: user.Aa,
+            },
+          };
+          fetch(
+            "https://babitz-backend.herokuapp.com/itemImageUpload?itemId=" +
+              json[0].id,
+            requestOptions1
+          )
+            .then((response) => response.json())
+            .then((json) => {
+              console.log(json);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -162,7 +190,6 @@ function Inventory() {
     formdata["price"] = Number(newitemprice);
     formdata["description"] = newitemdescr;
     formdata["status"] = newitemstatus;
-    console.log(formdata);
     var requestOptions = {
       method: "PATCH",
       body: JSON.stringify(formdata),
@@ -180,6 +207,31 @@ function Inventory() {
     )
       .then((response) => response.json())
       .then((json) => {
+        if (itemimage) {
+          var formdata1 = new FormData();
+          formdata1.append("file", itemimage);
+          var requestOptions1 = {
+            method: "POST",
+            body: formdata1,
+            redirect: "follow",
+            headers: {
+              Accept: "application/json",
+              Authorization: user.Aa,
+            },
+          };
+          fetch(
+            "https://babitz-backend.herokuapp.com/itemImageUpload?itemId=" +
+              json.id,
+            requestOptions1
+          )
+            .then((response) => response.json())
+            .then((json) => {
+              console.log(json);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
         var requestOptions1 = {
           redirect: "follow",
           headers: {
@@ -306,6 +358,7 @@ function Inventory() {
                   <Label>Item Image</Label>
                   <input
                     type="file"
+                    onChange={set_itemimage}
                     accept="image/*"
                     className="form-control"
                   />
@@ -503,6 +556,7 @@ function Inventory() {
                       <Label>Item Image</Label>
                       <input
                         type="file"
+                        onChange={set_itemimage}
                         accept="image/*"
                         className="form-control"
                       />
