@@ -15,7 +15,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "prettier": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --ignore-unknown",
-    "prettier:check": "npm run prettier -l",
+    "prettier:check": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --check --ignore-unknown",
     "prettier:fix": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --write --ignore-unknown",
     "prepare": "husky install",
     "pre-commit": "npm run prettier:check && npm run lint && npm run test && npm run cypress:run"
