@@ -15,10 +15,11 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "prettier": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --ignore-unknown",
-    "prettier:check": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --check --ignore-unknown",
-    "prettier:fix": "prettier '**pages/*.{js,jsx,vue}' '**pages/api/*.{js,jsx,vue}' --write --ignore-unknown",
+    "prettier:check": "npm run prettier -- --check",
+    "prettier:ci": "npm run prettier -- --list-different",
+    "prettier:fix": "npm run prettier -- --write",
     "prepare": "husky install",
-    "pre-commit": "npm run prettier:check && npm run lint && npm run test && npm run cypress:run"
+    "pre-commit": "npm run prettier:ci && npm run lint && npm run test && npm run cypress:run"
   },
   "dependencies": {
     "next": "11.0.1",
