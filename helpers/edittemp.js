@@ -37,7 +37,7 @@ function Edit(props) {
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={(e) => props.changefunc(e.target.value)}
+                    onChange={(e) => props.changefunc(e.target.files[0])}
                     className="form-control"
                     placeholder={props.modalname}
                     required

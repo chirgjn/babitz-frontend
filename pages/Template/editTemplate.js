@@ -132,13 +132,14 @@ function EditTemplate() {
   const [restdescr, setRestdescr] = useState("");
   const [restaddress, setRestaddress] = useState("");
   const [restlogo, setRestlogo] = useState("");
+  const [restbanner, setRestbanner] = useState("");
   const [modalname, setModalname] = useState("");
   const [modaltype, setModaltype] = useState("");
   const [modalfunc, setModalfunc] = useState("");
   const [changetype, setChangetype] = useState("");
   const [changefunc, setChangefunc] = useState("");
-
-  console.log(restlogo);
+  console.log(user);
+  // console.log(restlogo.value);
   useEffect(() => {
     async function getRest() {
       var requestOptions = {
@@ -200,11 +201,61 @@ function EditTemplate() {
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        router.push("/Dashboard/dashboard");
+        // router.push("/Dashboard/dashboard");
       })
       .catch((error) => {
         console.log(error);
       });
+    if (restlogo) {
+      var formdata = new FormData();
+      formdata.append("file", restlogo);
+      var requestOptions = {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+        headers: {
+          Accept: "application/json",
+          Authorization: user.Aa,
+        },
+      };
+      fetch(
+        "https://babitz-backend.herokuapp.com/restaurantImageUpload?type=logo",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          // router.push("/Dashboard/dashboard");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    if (restbanner) {
+      var formdata = new FormData();
+      formdata.append("file", restbanner);
+      var requestOptions = {
+        method: "POST",
+        body: formdata,
+        redirect: "follow",
+        headers: {
+          Accept: "application/json",
+          Authorization: user.Aa,
+        },
+      };
+      fetch(
+        "https://babitz-backend.herokuapp.com/restaurantImageUpload?type=banner",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          // router.push("/Dashboard/dashboard");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
   return (
     <div>
@@ -260,6 +311,15 @@ function EditTemplate() {
               </svg>
             </Logo>
             <svg
+              onClick={() => {
+                setModalname("Restaurant Banner Image");
+                setModalfunc("set_restbanner");
+                setModaltype("image");
+                setChangetype("restbanner");
+                setChangefunc("setRestbanner");
+              }}
+              data-toggle="modal"
+              data-target="#myModal"
               style={{ float: "right", marginTop: "-70px", cursor: "pointer" }}
               width="35"
               height="35"
@@ -417,7 +477,7 @@ function EditTemplate() {
           >
             Save & Next
           </Button>
-          <Button style={{ float: "right" }}>Save & Preview</Button>
+          {/*  <Button style={{ float: "right" }}>Save & Preview</Button>*/}
         </div>
       </Items>
       <Footer>
