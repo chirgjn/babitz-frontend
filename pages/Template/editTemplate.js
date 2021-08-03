@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Loader from "../Components/Loader";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import Edit from '../../helpers/edittemp';
+import Edit from "../../helpers/edittemp";
 import firebase from "firebase/app";
 
 //----------style-starts---------
@@ -131,47 +131,50 @@ function EditTemplate() {
   const [restname, setRestname] = useState("");
   const [restdescr, setRestdescr] = useState("");
   const [restaddress, setRestaddress] = useState("");
+  const [restlogo, setRestlogo] = useState("");
   const [modalname, setModalname] = useState("");
   const [modaltype, setModaltype] = useState("");
   const [modalfunc, setModalfunc] = useState("");
   const [changetype, setChangetype] = useState("");
   const [changefunc, setChangefunc] = useState("");
 
-
+  console.log(restlogo);
   useEffect(() => {
-  async function getRest(){
+    async function getRest() {
       var requestOptions = {
-        redirect: 'follow',
-        headers:{
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': user.Aa,
+        redirect: "follow",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: user.Aa,
         },
       };
-      const response = await fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
+      const response = await fetch(
+        "https://babitz-backend.herokuapp.com/myrestaurant",
+        requestOptions
+      );
       const restauarnt = await response.json();
       console.log(restauarnt);
-      if(restauarnt.name){
+      if (restauarnt.name) {
         setRestname(restauarnt.name);
-      }
-      else{
+      } else {
         setRestname("Babitz");
       }
-      if(restauarnt.description){
+      if (restauarnt.description) {
         setRestdescr(restauarnt.description);
+      } else {
+        setRestdescr(
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        );
       }
-      else{
-        setRestdescr("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
-      }
-      if(restauarnt.address){
+      if (restauarnt.address) {
         setRestaddress(restauarnt.address);
-      }
-      else{
+      } else {
         setRestaddress("21st Street, New York The USA");
       }
     }
     getRest();
-  },[user]);
+  }, [user]);
 
   const changeTemplate = () => {
     router.push("/Template/chooseTemplate");
@@ -184,25 +187,24 @@ function EditTemplate() {
     formdata["address"] = restaddress;
     console.log(JSON.stringify(formdata));
     var requestOptions = {
-      method: 'PATCH',
+      method: "PATCH",
       body: JSON.stringify(formdata),
-      redirect: 'follow',
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': user.Aa,
-          },
+      redirect: "follow",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: user.Aa,
+      },
     };
     fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
-    .then((response) => response.json())
- .then((json) => {
-   console.log(json);
-   router.push("/Dashboard/dashboard");
- })
- .catch((error)=>{
-   console.log(error);
- });
-
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        router.push("/Dashboard/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div>
@@ -221,12 +223,26 @@ function EditTemplate() {
       </Head>
       <Home>
         <div className="container">
-        <Edit changetype={eval(changetype)} changefunc={eval(changefunc)} modalname={modalname} modaltype={modaltype} modalfunc={modalfunc}/>
+          <Edit
+            changetype={eval(changetype)}
+            changefunc={eval(changefunc)}
+            modalname={modalname}
+            modaltype={modaltype}
+            modalfunc={modalfunc}
+          />
           <div style={{ marginTop: "20px" }}>
             <Logo>
               LOGO
               <svg
-                onClick={() => update("Logo")}
+                onClick={() => {
+                  setModalname("Restaurant Logo");
+                  setModalfunc("set_restlogo");
+                  setModaltype("image");
+                  setChangetype("restlogo");
+                  setChangefunc("setRestlogo");
+                }}
+                data-toggle="modal"
+                data-target="#myModal"
                 style={{ marginBottom: "20px", cursor: "pointer" }}
                 width="20"
                 height="20"
@@ -265,7 +281,13 @@ function EditTemplate() {
               <Restname>
                 {restname}
                 <svg
-                  onClick={() => {setModalname('Restaurant Name'); setModalfunc('set_restname'); setModaltype('text'); setChangetype('restname'); setChangefunc('setRestname')}}
+                  onClick={() => {
+                    setModalname("Restaurant Name");
+                    setModalfunc("set_restname");
+                    setModaltype("text");
+                    setChangetype("restname");
+                    setChangefunc("setRestname");
+                  }}
                   data-toggle="modal"
                   data-target="#myModal"
                   style={{
@@ -290,10 +312,20 @@ function EditTemplate() {
               </Restname>
               <Restdescr>
                 <svg
-                onClick={() => {setModalname('Restaurant Description'); setModalfunc('set_restdescr'); setModaltype('text'); setChangetype('restdescr'); setChangefunc('setRestdescr')}}
-                data-toggle="modal"
-                data-target="#myModal"
-                  style={{ cursor: "pointer", marginBottom: "20px", outline:'none' }}
+                  onClick={() => {
+                    setModalname("Restaurant Description");
+                    setModalfunc("set_restdescr");
+                    setModaltype("text");
+                    setChangetype("restdescr");
+                    setChangefunc("setRestdescr");
+                  }}
+                  data-toggle="modal"
+                  data-target="#myModal"
+                  style={{
+                    cursor: "pointer",
+                    marginBottom: "20px",
+                    outline: "none",
+                  }}
                   width="35"
                   height="35"
                   viewBox="0 0 27 27"
@@ -378,7 +410,8 @@ function EditTemplate() {
             <div className="col-sm-1"></div>
           </div>
           <Button onClick={changeTemplate}>Change Template</Button>
-          <Button type="submit"
+          <Button
+            type="submit"
             onClick={saveAndnext}
             style={{ float: "right", marginLeft: "10px" }}
           >
@@ -392,10 +425,16 @@ function EditTemplate() {
         <Address>
           {restaddress}
           <svg
-          onClick={() => {setModalname('Restaurant Address'); setModalfunc('set_restaddress'); setModaltype('text'); setChangetype('restaddress'); setChangefunc('setRestaddress')}}
-          data-toggle="modal"
-          data-target="#myModal"
-            style={{ cursor: "pointer", marginBottom: "20px", outline:'none' }}
+            onClick={() => {
+              setModalname("Restaurant Address");
+              setModalfunc("set_restaddress");
+              setModaltype("text");
+              setChangetype("restaddress");
+              setChangefunc("setRestaddress");
+            }}
+            data-toggle="modal"
+            data-target="#myModal"
+            style={{ cursor: "pointer", marginBottom: "20px", outline: "none" }}
             width="20"
             height="20"
             viewBox="0 0 27 27"

@@ -87,7 +87,6 @@ function ChooseTemplate() {
   );
   const user = firebase.auth().currentUser;
 
-  console.log(user);
   const choose_Template = (event) => {
     let value = event.target.value;
     setTemplate_id(value);
@@ -110,34 +109,33 @@ function ChooseTemplate() {
   };
 
   const save_Template = () => {
-    if(template_id!=3){
-    var formdata = new FormData();
-    formdata["templateId"] = template_id;
-    console.log(JSON.stringify(formdata));
+    if (template_id != 3) {
+      var formdata = new FormData();
+      formdata["templateId"] = template_id;
+      console.log(JSON.stringify(formdata));
 
-    var requestOptions = {
-      method: 'PATCH',
-      body: JSON.stringify(formdata),
-      redirect: 'follow',
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': user.Aa,
-          },
-    };
-    fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
-    .then((response) => response.json())
- .then((json) => {
-   console.log(json);
-   router.push("/Template/editTemplate");
- })
- .catch((error)=>{
-   console.log(error);
- });
-}
-else{
-  alert('This template is not avaiable currently');
-}
+      var requestOptions = {
+        method: "PATCH",
+        body: JSON.stringify(formdata),
+        redirect: "follow",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: user.Aa,
+        },
+      };
+      fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          router.push("/Template/editTemplate");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      alert("This template is not avaiable currently");
+    }
   };
   return (
     <div>
