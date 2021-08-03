@@ -31,7 +31,6 @@ const ImageDiv = styled.div`
 
 //------------styling-ends----------
 
-
 export default function Home() {
   let refAbout = useRef(null);
   let refContact = useRef(null);
@@ -386,7 +385,6 @@ export default function Home() {
         </div>
       </center>
       {/* --------------Contact-End---------------*/}
-
     </div>
   );
 }
