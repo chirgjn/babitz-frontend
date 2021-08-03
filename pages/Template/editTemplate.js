@@ -128,6 +128,7 @@ function EditTemplate() {
   const router = useRouter();
   const user = firebase.auth().currentUser;
 
+  const [loading, setloading] = useState(false);
   const [restname, setRestname] = useState("");
   const [restdescr, setRestdescr] = useState("");
   const [restaddress, setRestaddress] = useState("");
@@ -138,7 +139,7 @@ function EditTemplate() {
   const [modalfunc, setModalfunc] = useState("");
   const [changetype, setChangetype] = useState("");
   const [changefunc, setChangefunc] = useState("");
-  console.log(user);
+  // console.log(user);
   // console.log(restlogo.value);
   useEffect(() => {
     async function getRest() {
@@ -155,7 +156,6 @@ function EditTemplate() {
         requestOptions
       );
       const restauarnt = await response.json();
-      console.log(restauarnt);
       if (restauarnt.name) {
         setRestname(restauarnt.name);
       } else {
@@ -180,13 +180,13 @@ function EditTemplate() {
   const changeTemplate = () => {
     router.push("/Template/chooseTemplate");
   };
-  const saveAndnext = (e) => {
+  async function saveAndnext(e) {
     e.preventDefault();
+    setloading(true);
     var formdata = new FormData();
     formdata["name"] = restname;
     formdata["description"] = restdescr;
     formdata["address"] = restaddress;
-    console.log(JSON.stringify(formdata));
     var requestOptions = {
       method: "PATCH",
       body: JSON.stringify(formdata),
@@ -197,14 +197,18 @@ function EditTemplate() {
         Authorization: user.Aa,
       },
     };
-    fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
+    await fetch(
+      "https://babitz-backend.herokuapp.com/myrestaurant",
+      requestOptions
+    )
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
+        // console.log(json);
         // router.push("/Dashboard/dashboard");
       })
       .catch((error) => {
-        console.log(error);
+        setloading(false);
+        alert(error);
       });
     if (restlogo) {
       var formdata = new FormData();
@@ -218,17 +222,18 @@ function EditTemplate() {
           Authorization: user.Aa,
         },
       };
-      fetch(
+      await fetch(
         "https://babitz-backend.herokuapp.com/restaurantImageUpload?type=logo",
         requestOptions
       )
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
+          // console.log(json);
           // router.push("/Dashboard/dashboard");
         })
         .catch((error) => {
-          console.log(error);
+          setloading(false);
+          alert(error);
         });
     }
     if (restbanner) {
@@ -243,20 +248,26 @@ function EditTemplate() {
           Authorization: user.Aa,
         },
       };
-      fetch(
+      await fetch(
         "https://babitz-backend.herokuapp.com/restaurantImageUpload?type=banner",
         requestOptions
       )
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
+          // console.log(json);
           // router.push("/Dashboard/dashboard");
         })
         .catch((error) => {
-          console.log(error);
+          setloading(false);
+          alert(error);
         });
     }
-  };
+    setloading(false);
+    router.push("/Dashboard/dashboard");
+  }
+  if (loading == true) {
+    return <Loader />;
+  }
   return (
     <div>
       <Head>

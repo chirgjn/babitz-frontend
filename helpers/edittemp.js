@@ -2,7 +2,6 @@ import withAuth from "./withAuth";
 import { useEffect, useState } from "react";
 
 function Edit(props) {
-  console.log(props);
   const closeModal = () => {
     document.getElementById("restForm").reset();
   };

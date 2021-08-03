@@ -80,6 +80,7 @@ const Button = styled.div`
 
 function ChooseTemplate() {
   const router = useRouter();
+  const [loading, setloading] = useState(false);
   const [template_id, setTemplate_id] = useState("1");
   const [template_name, setTemplate_name] = useState("Template 1");
   const [template_descr, setTemplate_descr] = useState(
@@ -109,7 +110,8 @@ function ChooseTemplate() {
   };
 
   const save_Template = () => {
-    if (template_id != 3) {
+    if (template_id == 1) {
+      setloading(true);
       var formdata = new FormData();
       formdata["templateId"] = template_id;
       console.log(JSON.stringify(formdata));
@@ -127,16 +129,20 @@ function ChooseTemplate() {
       fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
           router.push("/Template/editTemplate");
+          setloading(false);
         })
         .catch((error) => {
-          console.log(error);
+          setloading(false);
+          alert(error);
         });
     } else {
       alert("This template is not avaiable currently");
     }
   };
+  if (loading == true) {
+    return <Loader />;
+  }
   return (
     <div>
       <Head>
