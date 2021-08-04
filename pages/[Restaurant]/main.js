@@ -19,7 +19,7 @@ const Logo = styled.p`
   color: lightgrey;
 `;
 const Home = styled.div`
-  background-image: url("/Bg_Template1.jpg");
+  background-image: url("https://babitz-s3.s3.ap-south-1.amazonaws.com/root/2369b04d-8026-435f-8fb1-57b668c65d11/banner");
   min-height: 60vh;
   width: 100%;
   background-repeat: no-repeat;
@@ -123,10 +123,12 @@ const Address = styled.p`
 `;
 function Usermain() {
   const router = useRouter();
-  const restname = router.query;
-
+  const url = router.query;
+  const lower = url.Restaurant;
+  const restname = lower.charAt(0).toUpperCase() + lower.slice(1);
   const [rest, setRest] = useState("");
   const [restitems, setRestitems] = useState([]);
+  const [restid, setRestid] = useState("");
   const [selectitems, setselectitems] = useState([
     {
       id: "",
@@ -141,17 +143,24 @@ function Usermain() {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization:
-          "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM1MzYyNGFmMTYwMGRhNzlmMzFmMDMxNGYyMDVkNGYzN2FkNmUyNDYiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTUNBIEREIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FBVFhBSndDMGc1eldFbEZSX3FiLTN0RnZKaDNRS09lUmNDenRlUGRRN2dQPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2JhYml0eiIsImF1ZCI6ImJhYml0eiIsImF1dGhfdGltZSI6MTYyNzg0NjgyOSwidXNlcl9pZCI6ImljaDkzbGprRzhabnA1TVRER0xpZEJOZ2R0VDIiLCJzdWIiOiJpY2g5M2xqa0c4Wm5wNU1UREdMaWRCTmdkdFQyIiwiaWF0IjoxNjI3ODU0NzA2LCJleHAiOjE2Mjc4NTgzMDYsImVtYWlsIjoibWNhZGQyMDE2MjAyMUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMjUzMzk3Mzc2ODIwMzk4MTA0OCJdLCJlbWFpbCI6WyJtY2FkZDIwMTYyMDIxQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.cPyWN3IIxOI23iD9wZj--ByOtyhNFOuGY1Uc-adOQfNppmJiV1bxAfJ9q5BcYBs8ALxMhZNRBNaLYa1U8al4gOx4UiR-rRotYMMc1ysNRIffSKG4Kc5Sw68eljgbwpwtntdbOyrL_zzKp4K_9BnO9nc4h2QN_HCChHwE3NR_nuQ9eewN6bDQNpk-8k3DoA0ofBJeKG0bx82eAGQPTwYi-0fgPdsNSVzjHCDltbhcCRd7XP-aF1oesVU2X9gvFdHiOMTzSfkLgmhCqijLXCd8mz7unB4iSb8F1OYbix_9KM0gVWecoHosUKmZa9BZfByWfdYuezy3fE7AYEE1p56ILQ",
       },
     };
-    fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
+    fetch(
+      "https://babitz-backend.herokuapp.com/getRestaurantByName?restautantName=" +
+        restname,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
         setRest(json);
+        setRestid(json.id);
       });
-    fetch("https://babitz-backend.herokuapp.com/getItems", requestOptions)
+    fetch(
+      "https://babitz-backend.herokuapp.com/getItemsByRestaurantName?restautantName" +
+        restname,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -166,7 +175,7 @@ function Usermain() {
         }
         setselectitems(list);
       });
-  }, []);
+  }, [restname]);
   function signOut() {
     firebase
       .auth()
@@ -176,7 +185,7 @@ function Usermain() {
   }
   const checkout = () => {
     if (restname != undefined) {
-      router.push(`/${restname.Restaurant}/checkout`);
+      router.push(`/${restname}/checkout`);
     }
   };
   const decrement_count = (id) => {
@@ -211,6 +220,14 @@ function Usermain() {
       <Home>
         <div className="container">
           <div style={{ marginTop: "20px" }}>
+            <Image
+              style={{ display: "inline-block" }}
+              layout="intrinsic"
+              width="300px"
+              height="400px"
+              src="https://babitz-s3.s3.ap-south-1.amazonaws.com/root/2369b04d-8026-435f-8fb1-57b668c65d11/logo"
+              alt=""
+            />
             <Logo style={{ display: "inline-block" }}>LOGO</Logo>
             <div style={{ float: "right", display: "inline-block" }}>
               <span
