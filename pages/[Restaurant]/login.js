@@ -61,24 +61,24 @@ function Userlogin() {
     if (restname != undefined) {
       router.push(`/${restname}/main`);
     }
-    // var formdata = new FormData();
-    // formdata["displayName"] = user.displayName;
-    // console.log(formdata);
-    // var requestOptions = {
-    //   method: "POST",
-    //   data: JSON.stringify(formdata),
-    //   redirect: "follow",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //     Authorization: user.Aa,
-    //   },
-    // };
-    // fetch("https://babitz-backend.herokuapp.com/registerUser", requestOptions)
-    //   .then((response) => response.json())
-    //   .then((json) => {
-    //     console.log(json);
-    //   });
+    var formdata = {
+      displayName: user.displayName,
+    };
+    var requestOptions = {
+      method: "POST",
+      body: JSON.stringify(formdata),
+      redirect: "follow",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: user.Aa,
+      },
+    };
+    fetch("https://babitz-backend.herokuapp.com/registerUser", requestOptions)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+      });
   };
 
   if (loading == true) {

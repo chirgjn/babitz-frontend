@@ -19,7 +19,6 @@ const Logo = styled.p`
   color: lightgrey;
 `;
 const Home = styled.div`
-  background-image: url("https://babitz-s3.s3.ap-south-1.amazonaws.com/root/2369b04d-8026-435f-8fb1-57b668c65d11/banner");
   min-height: 60vh;
   width: 100%;
   background-repeat: no-repeat;
@@ -126,16 +125,24 @@ function Usermain() {
   const url = router.query;
   const lower = url.Restaurant;
   const restname = lower.charAt(0).toUpperCase() + lower.slice(1);
+  const user = firebase.auth().currentUser;
+
   const [rest, setRest] = useState("");
   const [restitems, setRestitems] = useState([]);
   const [restid, setRestid] = useState("");
   const [selectitems, setselectitems] = useState([
     {
-      id: "",
       count: 0,
+      item: {},
     },
   ]);
-  // const [selectitemscount, setselectitemscount] = useState("");
+  const [cart, setCart] = useState("");
+  const [cartamount, setCartamount] = useState(0);
+
+  const myLoader = ({ src }) => {
+    return `https://babitz-s3.s3.ap-south-1.amazonaws.com/root/${restid}/${src}`;
+  };
+  const [selectitemscount, setselectitemscount] = useState(0);
 
   useEffect(() => {
     var requestOptions = {
@@ -155,6 +162,26 @@ function Usermain() {
         console.log(json);
         setRest(json);
         setRestid(json.id);
+        var requestOptions1 = {
+          redirect: "follow",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: user.Aa,
+          },
+        };
+        fetch(
+          "https://babitz-backend.herokuapp.com/getCart/?restaurantId=" +
+            json.id,
+          requestOptions1
+        )
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+            setCart(json);
+            setCartamount(json.amount);
+            setselectitems(json.items);
+          });
       });
     fetch(
       "https://babitz-backend.herokuapp.com/getItemsByRestaurantName?restautantName" +
@@ -164,18 +191,9 @@ function Usermain() {
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        const resp = json;
         setRestitems(json);
-        let list = [];
-        for (var i = 0; i < resp.length; i++) {
-          let obj = {};
-          obj["id"] = resp[i].id;
-          obj["count"] = 0;
-          list.push(obj);
-        }
-        setselectitems(list);
       });
-  }, [restname]);
+  }, [restname, user]);
   function signOut() {
     firebase
       .auth()
@@ -185,23 +203,73 @@ function Usermain() {
   }
   const checkout = () => {
     if (restname != undefined) {
-      router.push(`/${restname}/checkout`);
+      var formdata = cart;
+      formdata.amount = cartamount;
+      formdata.items = selectitems;
+      console.log(formdata);
+      var requestOptions = {
+        method: "PATCH",
+        body: JSON.stringify(formdata),
+        redirect: "follow",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: user.Aa,
+        },
+      };
+      fetch(
+        "https://babitz-backend.herokuapp.com/updateWholeCart",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((json) => {
+          window.location = `/${restname}/checkout`;
+        });
     }
   };
-  const decrement_count = (id) => {
-    let index = selectitems.findIndex((x) => x.id === id);
-    let temporaryarray = selectitems.slice();
-    if (temporaryarray[index].count > 0) {
-      temporaryarray[index].count -= 1;
-      setselectitems(temporaryarray);
+  const decrement_count = (item) => {
+    let id = item.id;
+    let index = selectitems.findIndex((x) => x.item.id === id);
+    try {
+      if (selectitems[index].qty > 1) {
+        console.log(selectitems[index].qty);
+        let temporaryarray = selectitems.slice();
+        temporaryarray[index].qty -= 1;
+        setselectitems(temporaryarray);
+      } else {
+        let temporaryarray = selectitems;
+        temporaryarray.splice(index, 1);
+      }
+      let amount = cartamount;
+      amount = amount - item.price;
+      setCartamount(amount);
+    } catch {}
+  };
+  const increment_count = (item) => {
+    let id = item.id;
+    let index = selectitems.findIndex((x) => x.item.id === id);
+    try {
+      if (selectitems[index].qty) {
+        console.log(selectitems[index].qty);
+        let temporaryarray = selectitems.slice();
+        temporaryarray[index].qty += 1;
+        setselectitems(temporaryarray);
+      }
+    } catch {
+      let obj = {};
+      obj["item"] = item;
+      obj["qty"] = 1;
+      var arr = selectitems;
+      arr.push(obj);
+      setselectitems(arr);
     }
+    let amount = cartamount;
+    amount = amount + item.price;
+    setCartamount(amount);
   };
-  const increment_count = (id) => {
-    let index = selectitems.findIndex((x) => x.id === id);
-    let temporaryarray = selectitems.slice();
-    temporaryarray[index].count += 1;
-    setselectitems(temporaryarray);
-  };
+  console.log(selectitems);
+  console.log(cartamount);
+  console.log(cart);
   return (
     <div>
       <Head>
@@ -217,19 +285,28 @@ function Usermain() {
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
         ></script>
       </Head>
-      <Home>
+      <Home
+        style={{
+          backgroundImage: `url("https://babitz-s3.s3.ap-south-1.amazonaws.com/root/${restid}/banner")`,
+        }}
+      >
         <div className="container">
-          <div style={{ marginTop: "20px" }}>
+          <div>
             <Image
               style={{ display: "inline-block" }}
-              layout="intrinsic"
-              width="300px"
-              height="400px"
-              src="https://babitz-s3.s3.ap-south-1.amazonaws.com/root/2369b04d-8026-435f-8fb1-57b668c65d11/logo"
+              loader={myLoader}
+              width={100}
+              height={100}
+              src="logo"
               alt=""
             />
-            <Logo style={{ display: "inline-block" }}>LOGO</Logo>
-            <div style={{ float: "right", display: "inline-block" }}>
+            <div
+              style={{
+                float: "right",
+                display: "inline-block",
+                marginTop: "20px",
+              }}
+            >
               <span
                 onClick={checkout}
                 style={{ color: "white", fontSize: "20px", cursor: "pointer" }}
@@ -273,41 +350,42 @@ function Usermain() {
                           </Itemdescr>
                           <span></span>
                           <span>
-                            {selectitems.map((data) =>
-                              data.id == item.id ? (
-                                <div
-                                  style={{
-                                    padding: "10px",
-                                    background: "lightgrey",
-                                    width: "100px",
-                                    textAlign: "center",
-                                    borderRadius: "10px",
-                                    fontSize: "15px",
-                                    fontFamily: "Oswald",
-                                  }}
-                                >
-                                  <span
-                                    onClick={() => decrement_count(item.id)}
-                                    style={{
-                                      marginRight: "10px",
-                                      cursor: "pointer",
-                                    }}
-                                    className="glyphicon glyphicon-minus"
-                                  ></span>
-                                  {data.count}
-                                  <span
-                                    onClick={() => increment_count(item.id)}
-                                    style={{
-                                      marginLeft: "10px",
-                                      cursor: "pointer",
-                                    }}
-                                    className="glyphicon glyphicon-plus"
-                                  ></span>
-                                </div>
-                              ) : (
-                                <div></div>
-                              )
-                            )}
+                            <div
+                              style={{
+                                padding: "10px",
+                                background: "lightgrey",
+                                width: "100px",
+                                textAlign: "center",
+                                borderRadius: "10px",
+                                fontSize: "15px",
+                                fontFamily: "Oswald",
+                              }}
+                            >
+                              <span
+                                onClick={() => decrement_count(item)}
+                                style={{
+                                  marginRight: "10px",
+                                  cursor: "pointer",
+                                }}
+                                className="glyphicon glyphicon-minus"
+                              ></span>
+                              {selectitems.map((data) => {
+                                if (data.item.id == item.id) {
+                                  console.log(data.qty);
+                                  return (
+                                    <span key={data.item.id}>{data.qty}</span>
+                                  );
+                                }
+                              })}
+                              <span
+                                onClick={() => increment_count(item)}
+                                style={{
+                                  marginLeft: "10px",
+                                  cursor: "pointer",
+                                }}
+                                className="glyphicon glyphicon-plus"
+                              ></span>
+                            </div>
                           </span>
                           <span></span>
                         </div>
