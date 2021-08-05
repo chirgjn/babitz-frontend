@@ -4,5 +4,5 @@ import Home from "../pages/index";
 
 it("Renders appropriately", () => {
   render(<Home />);
-  expect(screen.getByRole("heading", { name: "Babitz" })).toBeInTheDocument();
+  expect(screen.getByText( "Babitz" )).toBeInTheDocument();
 });
