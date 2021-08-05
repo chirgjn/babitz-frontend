@@ -436,6 +436,7 @@ function Inventory() {
                     borderBottomLeftRadius: "5px",
                     borderBottomRightRadius: "5px",
                     marginTop: "50px",
+                    fontFamily: "Oswald",
                     marginBottom: "50px",
                   }}
                   title="List Of All Exams"

@@ -53,208 +53,6 @@ const SubmitButton = styled.button`
 `;
 
 function PaymentLogs() {
-  const [select, setSelect] = useState("add");
-  const [itemname, setItemname] = useState("");
-  const [itemprice, setItemprice] = useState(0);
-  const [itemdescr, setItemdescr] = useState("");
-  const [items, setItems] = useState([]);
-  const [currentitem, setCurrentitem] = useState("");
-  const [newitemname, setNewitemname] = useState("");
-  const [newitemprice, setNewitemprice] = useState(0);
-  const [newitemdescr, setNewitemdescr] = useState("");
-  const [newitemstatus, setNewitemstatus] = useState(true);
-  const user = firebase.auth().currentUser;
-  useEffect(() => {
-    async function getItems() {
-      var requestOptions = {
-        redirect: "follow",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: user.Aa,
-        },
-      };
-      const response = await fetch(
-        "https://babitz-backend.herokuapp.com/getItems",
-        requestOptions
-      );
-      const list = await response.json();
-      setItems(list);
-    }
-    getItems();
-  }, [user.Aa]);
-
-  function signOut() {
-    // [START auth_sign_out]
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        currentUser();
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-    // [END auth_sign_out]
-  }
-  const set_itemname = (event) => {
-    setItemname(event.target.value);
-  };
-  const set_itemprice = (event) => {
-    setItemprice(event.target.value);
-  };
-  const set_itemdescr = (event) => {
-    setItemdescr(event.target.value);
-  };
-  const set_newitemname = (event) => {
-    setNewitemname(event.target.value);
-  };
-  const set_newitemprice = (event) => {
-    setNewitemprice(event.target.value);
-  };
-  const set_newitemdescr = (event) => {
-    setNewitemdescr(event.target.value);
-  };
-  const set_newitemstatus = (event) => {
-    console.log(event.target.value);
-    setNewitemstatus(eval(event.target.value));
-  };
-  const submit_item = (e) => {
-    e.preventDefault();
-    var formdata = new FormData();
-    formdata["name"] = itemname;
-    formdata["price"] = Number(itemprice);
-    formdata["description"] = itemdescr;
-    var requestOptions = {
-      method: "POST",
-      body: JSON.stringify([formdata]),
-      redirect: "follow",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: user.Aa,
-      },
-    };
-    fetch("https://babitz-backend.herokuapp.com/addItems", requestOptions)
-      .then((response) => response.json())
-      .then((json) => {
-        let add = items;
-        add.push(json[0]);
-        setItems(add);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    document.getElementById("inventoryForm").reset();
-  };
-  const edit_item = (rowData) => {
-    console.log(rowData);
-    setCurrentitem(rowData);
-    setNewitemname(rowData.name);
-    setNewitemprice(rowData.price);
-    setNewitemdescr(rowData.description);
-  };
-  const save_edit_item = (e) => {
-    e.preventDefault();
-    var formdata = new FormData();
-    formdata["name"] = newitemname;
-    formdata["price"] = Number(newitemprice);
-    formdata["description"] = newitemdescr;
-    formdata["status"] = newitemstatus;
-    console.log(formdata);
-    var requestOptions = {
-      method: "PATCH",
-      body: JSON.stringify(formdata),
-      redirect: "follow",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: user.Aa,
-      },
-    };
-    fetch(
-      "https://babitz-backend.herokuapp.com/updateItems/?itemId=" +
-        currentitem.id,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        var requestOptions1 = {
-          redirect: "follow",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: user.Aa,
-          },
-        };
-        fetch("https://babitz-backend.herokuapp.com/getItems", requestOptions1)
-          .then((response) => response.json())
-          .then((json) => {
-            setItems(json);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const delete_item = (id) => {
-    var formdata = new FormData();
-    var requestOptions = {
-      method: "DELETE",
-      body: formdata,
-      redirect: "follow",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: user.Aa,
-      },
-    };
-    fetch(
-      "https://babitz-backend.herokuapp.com/deleteItem/?id=" + id,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        var requestOptions1 = {
-          redirect: "follow",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: user.Aa,
-          },
-        };
-        fetch("https://babitz-backend.herokuapp.com/getItems", requestOptions1)
-          .then((response) => response.json())
-          .then((json) => {
-            setItems(json);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        var requestOptions1 = {
-          redirect: "follow",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: user.Aa,
-          },
-        };
-        fetch("https://babitz-backend.herokuapp.com/getItems", requestOptions1)
-          .then((response) => response.json())
-          .then((json) => {
-            setItems(json);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      });
-  };
   return (
     <div>
       <Head>
@@ -289,68 +87,33 @@ function PaymentLogs() {
                       borderBottomLeftRadius: "5px",
                       borderBottomRightRadius: "5px",
                       marginTop: "50px",
+                      fontFamily: "Oswald",
                       marginBottom: "50px",
                     }}
                     title="List Of All Exams"
                     columns={[
-                      { title: "Item Name", field: "name" },
+                      { title: "S.No.", field: "id" },
+                      { title: "Payment Id", field: "payment_id" },
+                      { title: "Payment Method", field: "payment_method" },
+                      { title: "Date/Time", field: "dateTime" },
+                      { title: "Amount", field: "amount" },
+                    ]}
+                    data={[
                       {
-                        title: "Item Price",
-                        field: "price",
-                        render: (rowData) => <div>₹ {rowData.price}</div>,
+                        id: 1,
+                        payment_id: "payment_32434",
+                        payment_method: "UPI",
+                        dateTime: "Thu, Jul 25, 2021",
+                        amount: "₹ 10000",
                       },
                       {
-                        title: "Availibility",
-                        field: "Availibility",
-                        render: (rowData) => (
-                          <div>
-                            {rowData.status == true ? (
-                              <div style={{ color: "lightgreen" }}>Active</div>
-                            ) : (
-                              <div style={{ color: "red" }}>Unactive</div>
-                            )}
-                          </div>
-                        ),
-                      },
-                      {
-                        title: "Edit",
-                        field: "Edit",
-                        render: (rowData) => (
-                          <div>
-                            {" "}
-                            <span
-                              style={{
-                                fontSize: "17px",
-                                color: "grey",
-                                cursor: "pointer",
-                              }}
-                              onClick={() => edit_item(rowData)}
-                              data-toggle="modal"
-                              data-target="#myModal"
-                              class="glyphicon glyphicon-edit"
-                            ></span>
-                          </div>
-                        ),
-                      },
-                      {
-                        title: "Delete",
-                        field: "Delete",
-                        render: (rowData) => (
-                          <div>
-                            <span
-                              style={{
-                                fontSize: "17px",
-                                color: "red",
-                                cursor: "pointer",
-                              }}
-                              onClick={() => delete_item(rowData.id)}
-                              class="glyphicon glyphicon-trash"
-                            ></span>
-                          </div>
-                        ),
+                        id: 2,
+                        payment_id: "payment_32435",
+                        payment_method: "UPI",
+                        dateTime: "Thu, Aug 5, 2021",
+                        amount: "₹ 12000",
                       },
                     ]}
-                    data={items}
                     options={{
                       headerStyle: {
                         background:

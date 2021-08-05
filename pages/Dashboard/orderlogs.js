@@ -53,16 +53,10 @@ const SubmitButton = styled.button`
 `;
 
 function OrderLogs() {
-  const [select, setSelect] = useState("add");
-  const [itemname, setItemname] = useState("");
-  const [itemprice, setItemprice] = useState(0);
-  const [itemdescr, setItemdescr] = useState("");
+  const [orders, setOrders] = useState([]);
   const [items, setItems] = useState([]);
-  const [currentitem, setCurrentitem] = useState("");
-  const [newitemname, setNewitemname] = useState("");
-  const [newitemprice, setNewitemprice] = useState(0);
-  const [newitemdescr, setNewitemdescr] = useState("");
-  const [newitemstatus, setNewitemstatus] = useState(true);
+  const [status, setStatus] = useState("");
+  const [orderid, setOrderid] = useState("");
   const user = firebase.auth().currentUser;
   useEffect(() => {
     async function getItems() {
@@ -75,185 +69,21 @@ function OrderLogs() {
         },
       };
       const response = await fetch(
-        "https://babitz-backend.herokuapp.com/getItems",
+        "https://babitz-backend.herokuapp.com/currentOrdersForRestaurant",
         requestOptions
       );
       const list = await response.json();
-      setItems(list);
+      console.log(list);
+      setOrders(list);
     }
     getItems();
   }, [user.Aa]);
 
-  function signOut() {
-    // [START auth_sign_out]
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        currentUser();
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-    // [END auth_sign_out]
-  }
-  const set_itemname = (event) => {
-    setItemname(event.target.value);
-  };
-  const set_itemprice = (event) => {
-    setItemprice(event.target.value);
-  };
-  const set_itemdescr = (event) => {
-    setItemdescr(event.target.value);
-  };
-  const set_newitemname = (event) => {
-    setNewitemname(event.target.value);
-  };
-  const set_newitemprice = (event) => {
-    setNewitemprice(event.target.value);
-  };
-  const set_newitemdescr = (event) => {
-    setNewitemdescr(event.target.value);
-  };
-  const set_newitemstatus = (event) => {
-    console.log(event.target.value);
-    setNewitemstatus(eval(event.target.value));
-  };
-  const submit_item = (e) => {
+  const submit_item_status = (e) => {
     e.preventDefault();
-    var formdata = new FormData();
-    formdata["name"] = itemname;
-    formdata["price"] = Number(itemprice);
-    formdata["description"] = itemdescr;
-    var requestOptions = {
-      method: "POST",
-      body: JSON.stringify([formdata]),
-      redirect: "follow",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: user.Aa,
-      },
-    };
-    fetch("https://babitz-backend.herokuapp.com/addItems", requestOptions)
-      .then((response) => response.json())
-      .then((json) => {
-        let add = items;
-        add.push(json[0]);
-        setItems(add);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    document.getElementById("inventoryForm").reset();
-  };
-  const edit_item = (rowData) => {
-    console.log(rowData);
-    setCurrentitem(rowData);
-    setNewitemname(rowData.name);
-    setNewitemprice(rowData.price);
-    setNewitemdescr(rowData.description);
-  };
-  const save_edit_item = (e) => {
-    e.preventDefault();
-    var formdata = new FormData();
-    formdata["name"] = newitemname;
-    formdata["price"] = Number(newitemprice);
-    formdata["description"] = newitemdescr;
-    formdata["status"] = newitemstatus;
-    console.log(formdata);
-    var requestOptions = {
-      method: "PATCH",
-      body: JSON.stringify(formdata),
-      redirect: "follow",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: user.Aa,
-      },
-    };
-    fetch(
-      "https://babitz-backend.herokuapp.com/updateItems/?itemId=" +
-        currentitem.id,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        var requestOptions1 = {
-          redirect: "follow",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: user.Aa,
-          },
-        };
-        fetch("https://babitz-backend.herokuapp.com/getItems", requestOptions1)
-          .then((response) => response.json())
-          .then((json) => {
-            setItems(json);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const delete_item = (id) => {
-    var formdata = new FormData();
-    var requestOptions = {
-      method: "DELETE",
-      body: formdata,
-      redirect: "follow",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: user.Aa,
-      },
-    };
-    fetch(
-      "https://babitz-backend.herokuapp.com/deleteItem/?id=" + id,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        var requestOptions1 = {
-          redirect: "follow",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: user.Aa,
-          },
-        };
-        fetch("https://babitz-backend.herokuapp.com/getItems", requestOptions1)
-          .then((response) => response.json())
-          .then((json) => {
-            setItems(json);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        var requestOptions1 = {
-          redirect: "follow",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: user.Aa,
-          },
-        };
-        fetch("https://babitz-backend.herokuapp.com/getItems", requestOptions1)
-          .then((response) => response.json())
-          .then((json) => {
-            setItems(json);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      });
+    console.log(10);
+    console.log(status);
+    console.log(orderid);
   };
   return (
     <div>
@@ -265,6 +95,42 @@ function OrderLogs() {
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
       </Head>
       <div className="container-fluid">
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+                <h4 class="modal-title">Edit Item Status</h4>
+              </div>
+              <form onSubmit={submit_item_status}>
+                <div class="modal-body">
+                  <Label>Edit Item Status</Label>
+                  <select
+                    className="form-control"
+                    onChange={(e) => setStatus(e.target.value)}
+                    required
+                  >
+                    <option value="">Select</option>
+                    <option value="pending">Pending</option>
+                    <option value="accept">Accept</option>
+                    <option value="complete">Complete</option>
+                  </select>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="submit"
+                    class="btn btn-default"
+                    data-dismiss="modal"
+                  >
+                    Save Change
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
         <div className="row">
           <div className="col-md-3">
             <Sidenav />
@@ -290,31 +156,53 @@ function OrderLogs() {
                       borderBottomRightRadius: "5px",
                       marginTop: "50px",
                       marginBottom: "50px",
+                      fontFamily: "Oswald",
                     }}
                     title="List Of All Exams"
                     columns={[
-                      { title: "Item Name", field: "name" },
                       {
-                        title: "Item Price",
-                        field: "price",
-                        render: (rowData) => <div>₹ {rowData.price}</div>,
-                      },
-                      {
-                        title: "Availibility",
-                        field: "Availibility",
+                        title: "Status",
+                        field: "Status",
                         render: (rowData) => (
-                          <div>
-                            {rowData.status == true ? (
-                              <div style={{ color: "lightgreen" }}>Active</div>
-                            ) : (
-                              <div style={{ color: "red" }}>Unactive</div>
-                            )}
+                          <div style={{ textTransform: "capitalize" }}>
+                            {rowData.orderStatus}
                           </div>
                         ),
                       },
                       {
+                        title: "Order Items",
+                        field: "Items",
+                        render: (rowData) => (
+                          <div>
+                            {rowData.items.map((data) => {
+                              return (
+                                <div>
+                                  {data.item.name} - {data.qty}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ),
+                      },
+                      {
+                        title: "Location",
+                        field: "Location",
+                        render: (rowData) => (
+                          <div>
+                            {rowData.location.firstLine},{" "}
+                            {rowData.location.pincode}
+                          </div>
+                        ),
+                      },
+                      {
+                        title: "Amount",
+                        field: "Amount",
+                        render: (rowData) => <div>₹ {rowData.amount}</div>,
+                      },
+                      {
                         title: "Edit",
                         field: "Edit",
+                        width: "10%",
                         render: (rowData) => (
                           <div>
                             {" "}
@@ -324,33 +212,16 @@ function OrderLogs() {
                                 color: "grey",
                                 cursor: "pointer",
                               }}
-                              onClick={() => edit_item(rowData)}
                               data-toggle="modal"
                               data-target="#myModal"
+                              onClick={() => setOrderid(rowData.id)}
                               class="glyphicon glyphicon-edit"
                             ></span>
                           </div>
                         ),
                       },
-                      {
-                        title: "Delete",
-                        field: "Delete",
-                        render: (rowData) => (
-                          <div>
-                            <span
-                              style={{
-                                fontSize: "17px",
-                                color: "red",
-                                cursor: "pointer",
-                              }}
-                              onClick={() => delete_item(rowData.id)}
-                              class="glyphicon glyphicon-trash"
-                            ></span>
-                          </div>
-                        ),
-                      },
                     ]}
-                    data={items}
+                    data={orders}
                     options={{
                       headerStyle: {
                         background:

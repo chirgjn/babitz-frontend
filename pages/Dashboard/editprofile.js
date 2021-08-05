@@ -157,7 +157,7 @@ function EditProfile() {
               <Label>Restaurant Email</Label>
               <NormalText>{rest.email}</NormalText>
               <Label>Website Link</Label>
-              <NormalText>www.vercel.babitz.app/{rest.name}</NormalText>
+              <NormalText>www.vercel.babitz.app/{rest.name}/login</NormalText>
               <Label>Restaurant Phone Number</Label>
               <input
                 type="tel"
