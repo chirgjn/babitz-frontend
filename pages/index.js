@@ -21,6 +21,8 @@ import Heading3 from "../components/LandingPage/Heading3";
 import StartedItems from "../components/LandingPage/StartedItems";
 import StartedList from "../components/LandingPage/StartedList";
 
+import withoutAuth from "../helpers/withoutAuth";
+
 //---------styling-starts----------
 
 const ImageDiv = styled.div`
@@ -32,7 +34,7 @@ const ImageDiv = styled.div`
 
 //------------styling-ends----------
 
-export default function Home() {
+function Home() {
   let refAbout = useRef(null);
   let refContact = useRef(null);
   const router = useRouter();
@@ -402,3 +404,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default withoutAuth(Home);
