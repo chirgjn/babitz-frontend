@@ -22,6 +22,7 @@
     "pre-commit": "npm run prettier:ci && npm run lint && npm run test && npm run cypress:run"
   },
   "dependencies": {
+    "firebase": "^8.7.1",
     "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
