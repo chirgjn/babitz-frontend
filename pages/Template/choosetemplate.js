@@ -129,7 +129,7 @@ function ChooseTemplate() {
       fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
         .then((response) => response.json())
         .then((json) => {
-          router.push("/Template/editTemplate");
+          router.push("/Template/edittemplate");
           setloading(false);
         })
         .catch((error) => {
