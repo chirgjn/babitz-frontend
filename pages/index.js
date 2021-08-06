@@ -288,18 +288,15 @@ function Home() {
                 <StartedList>
                   <StartedItems>
                     {" "}
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nunc sit amet quam ac mi
+                    Join us by clicking on ‘Start Now’ or ‘SignUp’.
                   </StartedItems>
                   <StartedItems>
                     {" "}
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nunc sit amet quam ac mi
+                    Select from our multiple templates as per your choice.
                   </StartedItems>
                   <StartedItems>
                     {" "}
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nunc sit amet quam ac mi
+                    Easily edit the template and start selling.
                   </StartedItems>
                 </StartedList>
                 <Button onClick={startNow}>Start Now</Button>
@@ -338,9 +335,10 @@ function Home() {
                     objectFit="contain"
                   />
                   <Heading3 style={{ marginTop: "20px", padding: "20px" }}>
-                    ‘Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nunc sit amet quam ac mi Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit. Nunc sit amet quam ac mi’{" "}
+                    I always wanted a website for my restaurant but it was
+                    always just too expensive to hire anyone. As a small
+                    restaurant owner in Paris, Babitz has really helped me to
+                    reach masses with my passion for feeding. Thanks guys!!
                   </Heading3>
                 </div>
                 <Button onClick={startNow} style={{ marginTop: "50px" }}>
@@ -393,9 +391,8 @@ function Home() {
           <div ref={refContact} id="Contact" style={{ marginTop: "30px" }}>
             <Heading2>Contact Us</Heading2>
             <Heading3 style={{ marginTop: "30px", marginBottom: "20px" }}>
-              ‘Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit
-              amet quam ac mi Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Nunc sit amet quam ac mi’{" "}
+              Gmail: contact.babitz@gmail.com
+              <br /> Contact: 902837XXXX
             </Heading3>
           </div>
         </div>

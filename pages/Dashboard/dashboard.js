@@ -7,7 +7,9 @@ import Loader from "../../components/Loader";
 import Sidenav from "../../components/Sidenav";
 import Profile from "../../components/Profile";
 import styled from "styled-components";
+import dynamic from "next/dynamic";
 
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 //-------style
 
 const Box = styled.div`
@@ -141,7 +143,16 @@ function Dashboard() {
             </div>
             <div
               style={{ overflowX: "auto", overflowY: "hidden", zIndex: "0" }}
-            ></div>
+            >
+              {" "}
+              <Chart
+                options={chartdata.options}
+                series={chartdata.series}
+                type="area"
+                width="95%"
+                height="400px"
+              />
+            </div>
           </div>
         </div>
       </div>

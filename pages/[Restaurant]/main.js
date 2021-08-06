@@ -263,7 +263,6 @@ function Usermain() {
     amount = amount + item.price;
     setCartamount(amount);
   };
-
   return (
     <div>
       <Head>
@@ -336,71 +335,75 @@ function Usermain() {
             <div className="col-sm-1"></div>
             <div className="col-sm-10">
               {restitems.map((item) => {
-                return (
-                  <div key={item.id}>
-                    <Box>
-                      <div className="row">
-                        <div className="col-sm-8">
-                          <Itemname>{item.name || <Skeleton />}</Itemname>
-                          <Itemprice>₹ {item.price || <Skeleton />}</Itemprice>
-                          <Itemdescr>
-                            {item.description || <Skeleton />}{" "}
-                          </Itemdescr>
-                          <span></span>
-                          <span>
-                            <div
-                              style={{
-                                padding: "10px",
-                                background: "lightgrey",
-                                width: "100px",
-                                textAlign: "center",
-                                borderRadius: "10px",
-                                fontSize: "15px",
-                                fontFamily: "Oswald",
-                              }}
-                            >
-                              <span
-                                onClick={() => decrement_count(item)}
+                if (item.status == true) {
+                  return (
+                    <div key={item.id}>
+                      <Box>
+                        <div className="row">
+                          <div className="col-sm-8">
+                            <Itemname>{item.name || <Skeleton />}</Itemname>
+                            <Itemprice>
+                              ₹ {item.price || <Skeleton />}
+                            </Itemprice>
+                            <Itemdescr>
+                              {item.description || <Skeleton />}{" "}
+                            </Itemdescr>
+                            <span></span>
+                            <span>
+                              <div
                                 style={{
-                                  marginRight: "10px",
-                                  cursor: "pointer",
+                                  padding: "10px",
+                                  background: "lightgrey",
+                                  width: "100px",
+                                  textAlign: "center",
+                                  borderRadius: "10px",
+                                  fontSize: "15px",
+                                  fontFamily: "Oswald",
                                 }}
-                                className="glyphicon glyphicon-minus"
-                              ></span>
-                              {selectitems.map((data) => {
-                                if (data.item.id == item.id) {
-                                  return (
-                                    <span key={data.item.id}>{data.qty}</span>
-                                  );
-                                }
-                              })}
-                              <span
-                                onClick={() => increment_count(item)}
-                                style={{
-                                  marginLeft: "10px",
-                                  cursor: "pointer",
-                                }}
-                                className="glyphicon glyphicon-plus"
-                              ></span>
+                              >
+                                <span
+                                  onClick={() => decrement_count(item)}
+                                  style={{
+                                    marginRight: "10px",
+                                    cursor: "pointer",
+                                  }}
+                                  className="glyphicon glyphicon-minus"
+                                ></span>
+                                {selectitems.map((data) => {
+                                  if (data.item.id == item.id) {
+                                    return (
+                                      <span key={data.item.id}>{data.qty}</span>
+                                    );
+                                  }
+                                })}
+                                <span
+                                  onClick={() => increment_count(item)}
+                                  style={{
+                                    marginLeft: "10px",
+                                    cursor: "pointer",
+                                  }}
+                                  className="glyphicon glyphicon-plus"
+                                ></span>
+                              </div>
+                            </span>
+                            <span></span>
+                          </div>
+                          <div className="col-sm-4">
+                            <div style={{ float: "right" }}>
+                              <Image
+                                src="/Image_Item1.png"
+                                layout="intrinsic"
+                                width="150px"
+                                height="150px"
+                                alt=""
+                              />
                             </div>
-                          </span>
-                          <span></span>
-                        </div>
-                        <div className="col-sm-4">
-                          <div style={{ float: "right" }}>
-                            <Image
-                              src="/Image_Item1.png"
-                              layout="intrinsic"
-                              width="150px"
-                              height="150px"
-                              alt=""
-                            />
                           </div>
                         </div>
-                      </div>
-                    </Box>
-                  </div>
-                );
+                      </Box>
+                    </div>
+                  );
+                }
               })}
             </div>
             <div className="col-sm-1"></div>

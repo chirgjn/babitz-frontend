@@ -56,7 +56,7 @@ const Template_name = styled.p`
 `;
 const Template_descr = styled.p`
   font-family: Oswald;
-  font-size: 33px;
+  font-size: 29px;
   margin-top: 40px;
   /* text-align: justify; */
   color: #000000;
@@ -85,7 +85,7 @@ function ChooseTemplate() {
   const [template_id, setTemplate_id] = useState("1");
   const [template_name, setTemplate_name] = useState("Template 1");
   const [template_descr, setTemplate_descr] = useState(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet quam ac mi"
+    "An elite and classy template to showcase your brand in a unique yet elegant way."
   );
   const user = firebase.auth().currentUser;
 
@@ -95,17 +95,17 @@ function ChooseTemplate() {
     if (value == 1) {
       setTemplate_name("Template 1");
       setTemplate_descr(
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet quam ac mi"
+        "An elite and classy template to showcase your brand in a unique yet elegant way."
       );
     } else if (value == 2) {
       setTemplate_name("Coming Soon");
       setTemplate_descr(
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet quam ac mi"
+        "A perfect template to make your customers as comfortable and homely virtually as you make them feel physically."
       );
     } else if (value == 3) {
       setTemplate_name("Coming Soon");
       setTemplate_descr(
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        " If you have a lot to offer to your customers, then this is the perfect template for your and your customers’ needs."
       );
     }
   };
