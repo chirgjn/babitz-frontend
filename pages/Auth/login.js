@@ -104,11 +104,10 @@ function Login() {
       fetch("https://babitz-backend.herokuapp.com/myrestaurant", requestOptions)
         .then((response) => response.json())
         .then((json) => {
-          console.log(json);
-          router.push("/Template/chooseTemplate");
+          router.push("/Template/choosetemplate");
         })
         .catch((error) => {
-          console.log(error);
+          alert(error);
         });
     } else if (!result.additionalUserInfo.isNewUser) {
       setAuthorizing(false);
