@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import router from "next/router";
 import "firebase/auth";
 import firebase from "firebase/app";
-import Loader from "../pages/Components/Loader.js";
+import Loader from "../components/Loader.js";
 
 import initFirebase from "../services/firebase.js";
 initFirebase();
