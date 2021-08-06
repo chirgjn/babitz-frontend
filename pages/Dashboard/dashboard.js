@@ -7,7 +7,6 @@ import Loader from "../../components/Loader";
 import Sidenav from "../../components/Sidenav";
 import Profile from "../../components/Profile";
 import styled from "styled-components";
-import Chart from "react-apexcharts";
 
 //-------style
 
@@ -142,15 +141,7 @@ function Dashboard() {
             </div>
             <div
               style={{ overflowX: "auto", overflowY: "hidden", zIndex: "0" }}
-            >
-              <Chart
-                options={chartdata.options}
-                series={chartdata.series}
-                type="area"
-                width="95%"
-                height="400px"
-              />
-            </div>
+            ></div>
           </div>
         </div>
       </div>
