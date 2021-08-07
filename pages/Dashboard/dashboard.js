@@ -8,7 +8,7 @@ import Sidenav from "../../components/Sidenav";
 import Profile from "../../components/Profile";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
-
+import withErrorFallBack from "../../helpers/witherror";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 //-------style
 
@@ -160,4 +160,4 @@ function Dashboard() {
   );
 }
 
-export default withAuth(Dashboard);
+export default withErrorFallBack(withAuth(Dashboard));

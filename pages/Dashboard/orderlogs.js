@@ -9,7 +9,7 @@ import Sidenav from "../../components/Sidenav";
 import styled from "styled-components";
 import MaterialTable from "material-table";
 import Profile from "../../components/Profile";
-
+import { useToast } from "../../hooks/useToast";
 //----------------styles
 
 const Heading = styled.h4`
@@ -55,6 +55,7 @@ function OrderLogs() {
   const [items, setItems] = useState([]);
   const [status, setStatus] = useState("");
   const [orderid, setOrderid] = useState("");
+  const { setError } = useToast();
   const user = firebase.auth().currentUser;
   useEffect(() => {
     async function getItems() {
@@ -71,6 +72,7 @@ function OrderLogs() {
         requestOptions
       );
       const list = await response.json();
+      setError({ message: "API SUCCESS" });
       setOrders(list);
     }
     getItems();

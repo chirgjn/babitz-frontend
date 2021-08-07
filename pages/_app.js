@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import "../Bootstrap/css/bootstrap.min.css";
-
+import { ToastProvider } from "../hooks/useToast";
 function MyApp({ Component, pageProps }) {
   return (
     <div>
@@ -12,7 +12,9 @@ function MyApp({ Component, pageProps }) {
         href="https://fonts.googleapis.com/css?family=Oswald"
         rel="stylesheet"
       />
-      <Component {...pageProps} />
+      <ToastProvider>
+        <Component {...pageProps} />
+      </ToastProvider>
     </div>
   );
 }
