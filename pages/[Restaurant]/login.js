@@ -33,7 +33,7 @@ function Userlogin() {
   const router = useRouter();
   const obj = router.query;
   const restname = obj.Restaurant;
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [authorizing, setAuthorizing] = useState(false);
   const [rest, setRest] = useState("");
   const myLoader = ({ src }) => {
@@ -67,7 +67,7 @@ function Userlogin() {
           setRest(json);
         });
     }
-  });
+  }, [restname]);
 
   const handleAuthentication = async () => {
     setAuthorizing(true);
@@ -96,9 +96,7 @@ function Userlogin() {
     };
     fetch("https://babitz-backend.herokuapp.com/registerUser", requestOptions)
       .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-      });
+      .then((json) => {});
   };
 
   if (loading == true) {
@@ -112,13 +110,15 @@ function Userlogin() {
       >
         <center>
           <Box>
-            <Image
-              loader={myLoader}
-              width={120}
-              height={120}
-              src="logo"
-              alt=""
-            />
+            {rest ? (
+              <Image
+                loader={myLoader}
+                width={120}
+                height={120}
+                src="logo"
+                alt=""
+              />
+            ) : null}
 
             <Heading style={{ marginTop: "10px" }}>{rest.name}</Heading>
             <svg
