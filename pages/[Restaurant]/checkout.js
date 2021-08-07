@@ -129,7 +129,6 @@ function Checkout() {
     )
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         if (json.location != null) {
           setUseraddress(json.location.firstLine);
           setUserpincode(json.location.pincode);
@@ -202,7 +201,6 @@ function Checkout() {
     )
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
         var requestOptions1 = {
           redirect: "follow",
           headers: {
@@ -218,7 +216,6 @@ function Checkout() {
         )
           .then((response) => response.json())
           .then((json) => {
-            console.log(json);
             let options = {
               key: "rzp_test_lkIRdzaooxSzYo", // Enter the Key ID generated from the Dashboard
               amount: cartamount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -227,7 +224,9 @@ function Checkout() {
               description: "Test Transaction",
               // image: "https://example.com/your_logo",
               order_id: json.paymentId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-              handler: function (response) {},
+              handler: function (response) {
+                alert("Order Placed Successfully");
+              },
               prefill: {
                 name: user.displayName,
                 email: user.email,
@@ -246,9 +245,6 @@ function Checkout() {
           });
       });
   };
-  console.log(cartamount);
-  console.log(cartitems);
-
   return (
     <div>
       <Head>

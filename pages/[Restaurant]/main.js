@@ -123,13 +123,12 @@ const Address = styled.p`
 function Usermain() {
   const router = useRouter();
   const url = router.query;
-  const lower = url.Restaurant;
-  const restname = lower.charAt(0).toUpperCase() + lower.slice(1);
+  const restname = url.Restaurant;
   const user = firebase.auth().currentUser;
 
   const [rest, setRest] = useState("");
   const [restitems, setRestitems] = useState([]);
-  const [restid, setRestid] = useState("");
+  const [restid, setRestid] = useState(null);
   const [selectitems, setselectitems] = useState([
     {
       count: 0,
@@ -263,6 +262,9 @@ function Usermain() {
     amount = amount + item.price;
     setCartamount(amount);
   };
+  if (!restid) {
+    return <Loader />;
+  }
   return (
     <div>
       <Head>
@@ -289,14 +291,17 @@ function Usermain() {
       >
         <div className="container">
           <div>
-            <Image
-              style={{ display: "inline-block" }}
-              loader={myLoader}
-              width={100}
-              height={100}
-              src="logo"
-              alt=""
-            />
+            {restid != null ? (
+              <Image
+                style={{ display: "inline-block" }}
+                loader={myLoader}
+                width={100}
+                height={100}
+                src="logo"
+                alt=""
+              />
+            ) : null}
+
             <div
               style={{
                 float: "right",
