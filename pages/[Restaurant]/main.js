@@ -184,7 +184,7 @@ function Usermain() {
           });
       });
     fetch(
-      "https://babitz-backend.herokuapp.com/getItemsByRestaurantName?restautantName" +
+      "https://babitz-backend.herokuapp.com/getItemsByRestaurantName?restautantName=" +
         restname,
       requestOptions
     )
