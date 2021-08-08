@@ -168,7 +168,7 @@ function EditProfile() {
               />
               <Label>Restaurant Payment Details</Label>
               <input
-                type="text"
+                type="password"
                 className="form-control"
                 pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$"
                 onChange={set_restaccount}
