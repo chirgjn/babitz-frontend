@@ -36,6 +36,7 @@ function Userlogin() {
   const [loading, setLoading] = useState(false);
   const [authorizing, setAuthorizing] = useState(false);
   const [rest, setRest] = useState("");
+  const [error, setError] = useState("");
   const myLoader = ({ src }) => {
     return `https://babitz-s3.s3.ap-south-1.amazonaws.com/root/${rest.id}/${src}`;
   };
@@ -65,6 +66,9 @@ function Userlogin() {
         .then((response) => response.json())
         .then((json) => {
           setRest(json);
+          if (json.error) {
+            setError(json.error);
+          }
         });
     }
   }, [restname]);
@@ -101,6 +105,20 @@ function Userlogin() {
 
   if (loading == true) {
     return <Loader />;
+  }
+  if (error) {
+    return (
+      <div>
+        <div
+          className="container-fluid"
+          style={{ background: "#AFDFFF", height: "100vh" }}
+        >
+          <Heading style={{ marginTop: "100px", textTransform: "Capitalize" }}>
+            {error.message}
+          </Heading>
+        </div>
+      </div>
+    );
   }
   return (
     <div>

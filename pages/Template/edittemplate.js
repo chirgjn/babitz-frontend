@@ -139,7 +139,7 @@ function EditTemplate() {
   const [modalfunc, setModalfunc] = useState("");
   const [changetype, setChangetype] = useState("");
   const [changefunc, setChangefunc] = useState("");
-
+  const [error, setError] = useState("");
   useEffect(() => {
     async function getRest() {
       var requestOptions = {
@@ -201,10 +201,11 @@ function EditTemplate() {
       requestOptions
     )
       .then((response) => response.json())
-      .then((json) => {})
-      .catch((error) => {
-        setloading(false);
-        alert(error);
+      .then((json) => {
+        if (json.error) {
+          setError("This restaurant name already exist");
+          setloading(false);
+        }
       });
     if (restlogo) {
       var formdata = new FormData();
@@ -223,10 +224,10 @@ function EditTemplate() {
         requestOptions
       )
         .then((response) => response.json())
-        .then((json) => {})
-        .catch((error) => {
-          setloading(false);
-          alert(error);
+        .then((json) => {
+          if (json.error) {
+            setloading(false);
+          }
         });
     }
     if (restbanner) {
@@ -246,13 +247,12 @@ function EditTemplate() {
         requestOptions
       )
         .then((response) => response.json())
-        .then((json) => {})
-        .catch((error) => {
-          setloading(false);
-          alert(error);
+        .then((json) => {
+          if (json.error) {
+            setloading(false);
+          }
         });
     }
-    setloading(false);
     router.push("/Dashboard/dashboard");
   }
   if (loading == true) {
@@ -418,6 +418,20 @@ function EditTemplate() {
       </Home>
       <Items>
         <div className="container">
+          {error ? (
+            <div class="alert alert-danger fade in alert-dismissible">
+              <a
+                href="#"
+                class="close"
+                data-dismiss="alert"
+                aria-label="close"
+                title="close"
+              >
+                ×
+              </a>
+              <strong>Danger!</strong> {error}
+            </div>
+          ) : null}
           <div className="row">
             <div className="col-sm-1"></div>
             <div className="col-sm-10">
