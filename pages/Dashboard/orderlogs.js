@@ -89,14 +89,6 @@ function OrderLogs() {
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
         />
-        <script
-          async
-          src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-        ></script>
-        <script
-          async
-          src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-        ></script>
       </Head>
       <div className="container-fluid">
         <div class="modal fade" id="myModal" role="dialog">

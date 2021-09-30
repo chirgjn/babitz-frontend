@@ -9,7 +9,7 @@ import Sidenav from "../../components/Sidenav";
 import styled from "styled-components";
 import MaterialTable from "material-table";
 import Profile from "../../components/Profile";
-
+import Style from "../../styles/myModal.module.css";
 //----------------styles
 
 const Heading = styled.h4`
@@ -62,6 +62,7 @@ function Inventory() {
   const [newitemprice, setNewitemprice] = useState(0);
   const [newitemdescr, setNewitemdescr] = useState("");
   const [newitemstatus, setNewitemstatus] = useState(true);
+  const [editable, setEditable] = useState(false);
   const user = firebase.auth().currentUser;
   useEffect(() => {
     async function getItems() {
@@ -123,6 +124,7 @@ function Inventory() {
   };
   const submit_item = (e) => {
     e.preventDefault();
+    setEditable(false);
     var formdata = new FormData();
     formdata["name"] = itemname;
     formdata["price"] = Number(itemprice);
@@ -169,6 +171,7 @@ function Inventory() {
     document.getElementById("inventoryForm").reset();
   };
   const edit_item = (rowData) => {
+    setEditable(true);
     setCurrentitem(rowData);
     setNewitemname(rowData.name);
     setNewitemprice(rowData.price);
@@ -176,6 +179,7 @@ function Inventory() {
   };
   const save_edit_item = (e) => {
     e.preventDefault();
+    setEditable(false);
     var formdata = new FormData();
     formdata["name"] = newitemname;
     formdata["price"] = Number(newitemprice);
@@ -296,21 +300,18 @@ function Inventory() {
           rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
         />
-        <script
-          async
-          src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-        ></script>
-        <script
-          async
-          src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-        ></script>
       </Head>
       <div className="container-fluid">
-        <div className="modal fade" id="myModal" role="dialog">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal">
+        {editable === true ? (
+          <div className={Style.modal} id={Style.myModal} role="dialog">
+            <div className={Style.modalContent}>
+              <div className={Style.modalHeader}>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  onClick={() => setEditable(false)}
+                >
                   &times;
                 </button>
                 <h4 className="modal-title">Edit Items</h4>
@@ -374,7 +375,8 @@ function Inventory() {
               </form>
             </div>
           </div>
-        </div>
+        ) : null}
+
         <div className="row">
           <div className="col-md-3">
             <Sidenav />
