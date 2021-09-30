@@ -119,7 +119,7 @@ function Dashboard() {
               <div className="col-sm-3">
                 <Box>
                   <Heading>Best Selling Item</Heading>
-                  <NormalText>Cholle Bhaute</NormalText>
+                  <NormalText>Pepperoni Pizza</NormalText>
                 </Box>
               </div>
               <div className="col-sm-3">

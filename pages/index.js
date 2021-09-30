@@ -119,8 +119,8 @@ function Home() {
           >
             <Heading2>About Us</Heading2>
             <NormalText style={{ marginTop: "50px" }}>
-              We Give Restaurants The Ability To Make Thier Our Websites, So
-              That They Can Potray Thier Brand In A Better Way.
+              We Give Restaurants The Ability To Make Their Own Websites And
+              Potray Their Brand In A Better Way.
             </NormalText>
             <ImageDiv>
               <Image
@@ -193,7 +193,7 @@ function Home() {
                     Multiple Templates
                   </span>
                   <br /> We offer restaurants an option to choose from multiple
-                  templates so that you represent your food the way you want to.
+                  templates so that they represent food the way they want to.
                 </Heading3>
               </div>
               <div className="col-sm-4" style={{ marginBottom: "50px" }}>
@@ -225,8 +225,8 @@ function Home() {
                     Live Edit
                   </span>
                   <br />
-                  Edit the tempelate of your choice easily and get to see all
-                  the changes being made live.
+                  Edit the template of your choice easily and get to see all the
+                  changes being made live.
                 </Heading3>
               </div>
             </div>
@@ -335,10 +335,10 @@ function Home() {
                     objectFit="contain"
                   />
                   <Heading3 style={{ marginTop: "20px", padding: "20px" }}>
-                    I always wanted a website for my restaurant but it was
-                    always just too expensive to hire anyone. As a small
-                    restaurant owner in Paris, Babitz has really helped me to
-                    reach masses with my passion for feeding. Thanks guys!!
+                    I always wanted a website for my restaurant but it was just
+                    too expensive to hire anyone. As a small restaurant owner in
+                    Paris, Babitz has really helped me to reach masses with my
+                    passion for cooking. Thanks guys!!
                   </Heading3>
                 </div>
                 <Button onClick={startNow} style={{ marginTop: "50px" }}>

@@ -173,6 +173,21 @@ function Login() {
                       Sign Up
                     </button>
                   </NormalText>
+                  <div
+                    style={{
+                      background: "#ffc535",
+                      padding: "10px",
+                      borderRadius: "10px",
+                      fontSize: "15px",
+                      fontFamily: "Oswald",
+                      fontStyle: "normal",
+                      letterSpacing: "2px",
+                    }}
+                  >
+                    Sign In Credentials: <br />
+                    Email: ninja4delta@gmail.com <br />
+                    Password: qwerty@123
+                  </div>
                 </center>
               </div>
             </div>
